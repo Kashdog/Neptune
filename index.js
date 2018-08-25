@@ -5,6 +5,7 @@ const express    = require("express"),
 
 
 // All routes will go here.
+app.use("/api/auth", require("./routes/auth"));
 
 // 404 Error Generator
 app.use((req, res, next) => {

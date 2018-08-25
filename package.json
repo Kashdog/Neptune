@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Jonny15t/janus_api#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongoose": "^5.2.9",
+    "passport": "^0.4.0"
   }
 }
