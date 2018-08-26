@@ -4,8 +4,21 @@ const express    = require("express"),
       bodyParser = require("body-parser");
 
 
-// All routes will go here.
+// set view engine to ejs
+app.set('view engine', 'ejs')
+
+// use static files from public folder
+app.use(express.static(__dirname + '/public'))
+
+//  ***** All routes will go here. *****
+
+// create route for '/' and render the 'index.ejs' file to the browser
+app.get('/', function(req, res) {
+  res.render('index')
+})
+
 app.use("/api/auth", require("./routes/auth"));
+
 
 // 404 Error Generator
 app.use((req, res, next) => {
