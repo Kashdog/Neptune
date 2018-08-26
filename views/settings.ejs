@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dastan</title>
+  <script src="https://use.typekit.net/lkh0ago.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="../ruby.png" type="image/x-icon" />
+  <style>
+    .menuicon{
+      padding:0px;
+      position: absolute;;
+      text-align:center;
+      display: block;
+      top: 2%;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt="">
+
+  <div id='settings' ontouchstart>
+  <input checked class='nav' name='nav' type='radio'>
+  <span class='nav'>Profile</span>
+  <input class='nav' name='nav' type='radio'>
+  <span class='nav'>Account</span>
+  <main class='content'>
+    <section id='profile'>
+      <form>
+        <ul>
+          <li class='large padding avatar'>
+            <img src="goa.jpg" height="60px" width="60px">
+            <div>
+              <fieldset class='material-button'>
+                <div>
+                  <button>Select File</button>
+                </div>
+              </fieldset>
+            </div>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text' value='Aneesh Kashalikar'>
+                <label>Name</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text'>
+                <label>Location</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text'>
+                <label>Title</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text'>
+                <label>Website</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li class='large'>
+            <fieldset class='material'>
+              <div>
+                <input required type='text'>
+                <label>About</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li class='large padding'>
+            <fieldset class='material-button center'>
+              <div>
+                <input class='save' type='submit' value='Save'>
+              </div>
+            </fieldset>
+          </li>
+        </ul>
+      </form>
+    </section>
+    <section id='account'>
+      <form>
+        <ul>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text' value='email@domain.com'>
+                <label>Email</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='text'>
+                <label>Username</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='password'>
+                <label>Password</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class='material'>
+              <div>
+                <input required type='password'>
+                <label>Confirm Password</label>
+                <hr>
+              </div>
+            </fieldset>
+          </li>
+          <li class='padding'>
+            <fieldset class='material-button'>
+              <div>
+                <button class='connect gh connected'>
+                  <span>Unlink Github Account</span>
+                </button>
+              </div>
+            </fieldset>
+          </li>
+          <li class='padding'>
+            <fieldset class='material-button'>
+              <div>
+                <button class='connect tw'>
+                  <span>Link Twitter Account</span>
+                </button>
+              </div>
+            </fieldset>
+          </li>
+          <li class='padding'>
+            <fieldset class='material-button'>
+              <div>
+                <button class='connect fb'>
+                  <span>Link Facebook Account</span>
+                </button>
+              </div>
+            </fieldset>
+          </li>
+          <li class='padding'>
+            <fieldset class='material-button'>
+              <div>
+                <button class='connect li'>
+                  <span>Link LinkedIn Account</span>
+                </button>
+              </div>
+            </fieldset>
+          </li>
+          <li class='large padding'>
+            <fieldset class='material-button center'>
+              <div>
+                <input class='save' type='submit' value='Save'>
+              </div>
+            </fieldset>
+          </li>
+        </ul>
+      </form>
+    </section>
+    <section class='upcoming' id='privacy'>
+      <h1>Coming&nbsp;soon!</h1>
+    </section>
+    <section class='upcoming' id='advanced'>
+      <h1>Coming&nbsp;soon!</h1>
+    </section>
+  </main>
+</div>
+  
+  
+
+    <script  src="js/settings.js"></script>
+
+
+
+
+</body>
+
+</html>
