@@ -3,6 +3,6 @@ const express = require("express"),
       handler = require("../handlers/auths");
 
 router.route("/signup")
-  .get(handler.signup);
+  .post(handler.signup);
 
 module.exports = router;

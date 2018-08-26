@@ -3,6 +3,8 @@ const express    = require("express"),
       app        = express(),
       bodyParser = require("body-parser");
 
+// App settings.
+app.use(bodyParser.json())
 
 // All routes will go here.
 app.use("/api/auth", require("./routes/auth"));
