@@ -31,19 +31,13 @@ app.use(express.static(__dirname + '/public'))
 
 //  ***** All routes will go here. *****
 
+app.use('/user', authMW.isValidated, require('./routes/user'));
+app.use('/auth', require('./routes/auth'));
+
 // create route for '/' and render the 'index.ejs' file to the browser
 app.get('/', (req, res, next) => {
   res.render('index')
-})
-
-// FOR TESTING AUTHENTICATION ONLY -- REMOVE BEFORE PRODUCTION
-app.get('/menu', authMW.isValidated, (req, res, next) => {
-  res.render('menu');
-})
-// -----------------------------------------------------------
-
-app.use('/auth', require('./routes/auth'));
-
+});
 
 // 404 Error Generator
 app.use((req, res, next) => {

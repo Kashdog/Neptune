@@ -1,8 +1,7 @@
 const express  = require("express"),
       router   = express.Router(),
       handler  = require("../handlers/auths"),
-      authMW   = require("../middleware/auth"),
-      passport = require('passport');
+      authMW   = require("../middleware/auth");
 
 router.route("/signup")
   .get(handler.signup)
@@ -11,5 +10,8 @@ router.route("/signup")
 router.route("/login")
   .get(handler.login)
   .post(authMW.auth, handler.authenticate);
+
+  router.route("/logout")
+  .get(handler.logout)
 
 module.exports = router;

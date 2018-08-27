@@ -4,7 +4,7 @@ const db       = require("../models"),
 exports.signup = async (req, res, next) => {
   try{
     if (req.isAuthenticated()) {
-      res.redirect("/menu")
+      res.redirect("/user")
     } else {
       res.render('signup', {
         message: "",
@@ -14,7 +14,7 @@ exports.signup = async (req, res, next) => {
         phone: ""
       });
     }
-  } catch (err) {
+  } catch(err) {
     return next(err);
   }
 }
@@ -22,13 +22,13 @@ exports.signup = async (req, res, next) => {
 exports.create = async (req, res, next) => {
   try{
     if (req.isAuthenticated()) {
-      res.redirect("/menu");
+      res.redirect("/user");
     } else {
       const { username, email, phone, password } = req.body;
       db.User.register(new db.User({username, email, phone}), password, (err, newUser) => {
         if (!err) {
           passport.authenticate("local")(req, res, function(){
-            res.redirect("/menu")
+            res.redirect("/user/edit");
           });
         } else {
           let errorMessage = "";
@@ -47,7 +47,7 @@ exports.create = async (req, res, next) => {
         }
       });
     }
-  } catch (err) {
+  } catch(err) {
     return next(err);
   }
 }
@@ -55,11 +55,11 @@ exports.create = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try{
     if (req.isAuthenticated()) {
-      res.redirect("/menu");
+      res.redirect("/user");
     } else {
       res.render('signin');
     }   
-  } catch (err) {
+  } catch(err) {
     return next(err);
   }
 }
@@ -68,6 +68,15 @@ exports.authenticate = async (req, res, next) => {
   try{
     res.send("How did you get here?");
   } catch (err) {
+    return next(err);
+  }
+}
+
+exports.logout = async (req, res, next) => {
+  try{
+    req.logout();
+    res.redirect("/auth/login");
+  } catch(err) {
     return next(err);
   }
 }

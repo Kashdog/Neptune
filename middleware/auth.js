@@ -1,9 +1,9 @@
 const passport = require('passport');
 
 exports.auth = passport.authenticate("local", {
-  successRedirect: "/menu",
+  successRedirect: "/user/",
   failureRedirect: "/auth/login"
-})
+});
 
 exports.isValidated = (req, res, next) => {
   if (!req.isAuthenticated()) {
