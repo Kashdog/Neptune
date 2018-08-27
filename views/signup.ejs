@@ -25,9 +25,9 @@
 <body>
   <img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt="">
   <div id='settings' ontouchstart>
-  <input checked class='nav' name='nav' type='radio'>
-  <span class='nav'>Log In</span>
   <input class='nav' name='nav' type='radio'>
+  <span class='nav'>Log In</span>
+  <input checked class='nav' name='nav' type='radio'>
   <span class='nav'>Sign Up</span>
   <main class='content'>
     <section id='profile'>
@@ -64,12 +64,12 @@
       </form>
     </section>
     <section id='account'>
-      <form>
+      <form action="/auth/signup" method="POST">
         <ul>
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text' value='email@domain.com'>
+                <input required type='text' value='<%=email%>' name='email'>
                 <label>Email</label>
                 <hr>
               </div>
@@ -78,7 +78,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' value='<%=username%>' name='username'>
                 <label>Username</label>
                 <hr>
               </div>
@@ -87,7 +87,7 @@
           <li>
                 <fieldset class='material'>
                   <div>
-                    <input required type='text'>
+                    <input type='text' value='<%=linkedIn%>' name='linkedIn'>
                     <label>Linkedin</label>
                     <hr>
                   </div>
@@ -96,7 +96,7 @@
           <li>
             <fieldset class='material'>
                 <div>
-                <input required type='text'>
+                <input required type='text' value='<%=phone%>' name='phone'>
                 <label>Phone Number</label>
                 <hr>
                 </div>
@@ -105,7 +105,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='password'>
+                <input required type='password' name='password'>
                 <label>Password</label>
                 <hr>
               </div>
@@ -150,9 +150,10 @@
           </li>
           <li class='large padding'>
             <fieldset class='material-button center'>
+              <p class="error"><%=message%></p>
               <div>
                 <input class='save' type='submit' value='Save'>
-              </div>
+              </div>            
             </fieldset>
           </li>
         </ul>

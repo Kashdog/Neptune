@@ -1,10 +1,27 @@
 const PORT       = 8081;
-const express    = require("express"),
+const express    = require('express'),
       app        = express(),
-      bodyParser = require("body-parser");
+      bodyParser = require('body-parser'),
+      passport   = require('passport'),
+      session    = require('express-session'),
+      localStrat = require('passport-local'),
+      db         = require("./models"),
+      authMW     = require("./middleware/auth");
 
 // App settings.
-app.use(bodyParser.json())
+app.use(session({
+  secret: "russelWANTEDdekANDaneeshWANTEDjanusWHOwillWIN?weDONTknow!",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new localStrat(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+
 
 // set view engine to ejs
 app.set('view engine', 'ejs')
@@ -15,23 +32,29 @@ app.use(express.static(__dirname + '/public'))
 //  ***** All routes will go here. *****
 
 // create route for '/' and render the 'index.ejs' file to the browser
-app.get('/', function(req, res) {
+app.get('/', (req, res, next) => {
   res.render('index')
 })
 
-app.use("/api/auth", require("./routes/auth"));
+// FOR TESTING AUTHENTICATION ONLY -- REMOVE BEFORE PRODUCTION
+app.get('/menu', authMW.isValidated, (req, res, next) => {
+  res.render('menu');
+})
+// -----------------------------------------------------------
+
+app.use('/auth', require('./routes/auth'));
 
 
 // 404 Error Generator
 app.use((req, res, next) => {
-  let err = new Error("Oops! Endpoint could not be located.");
+  let err = new Error('Oops! Page could not be located.');
   err.status = 404;
   next(err);
 })
 
 // Error Handler
-app.use(require("./handlers/errors"));
+app.use(require('./handlers/errors'));
 
 app.listen(PORT, () => {
-  console.log(`API Server listening on port ${PORT}.`);
+  console.log(`Server listening on port ${PORT}.`);
 })

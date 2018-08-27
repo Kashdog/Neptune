@@ -1,61 +1,74 @@
 const mongoose = require("mongoose"),
-      validate = require("validator");
+      validate = require("validator"),
+      plm      = require("passport-local-mongoose"),
+      db       = require("./index");
 
 const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 30
-  },
-  lastName: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30
-  },
   email: {
     type: String,
-    required: true,
-    unique: true,
-    maxlength: 30,
-    validate: [validate.isEmail, "Please enter a valid email address."]
+    required: [true, "An email address is required."],
+    validate: {
+      validator: async function(val) {
+        let existingEmail = await db.User.findOne({email: val}) 
+        if (!existingEmail){
+          return true;
+        } else {
+          return false;
+        }
+      },
+      name: "EmailExistsError",
+      message: "This email address is already taken."
+    }
   },
   username: {
     type: String,
-    required: true,
-    unique: true,
-    minlength: 5,
-    maxlength: 30
+    required: [true, "A username is required."]
   },
   password: {
+    type: String
+  },
+  phone: {
     type: String,
-    required: true,
-    minlength: 6,
-    maxlength: 30
-  },
-  bio: {
-    type: String
-  },
-  contacts: {
-    type: String
-  },
-  pendingInvites: {
-    type: String
-  },
-  location: {
-    type: String
-  },
-  title: {
-    type: String
-  },
-  website: {
-    type: String
-  },
-  profilePictureUrl: {
-    type: String
+    required: [true, "A phone number is required."]
   }
 });
 
+userSchema.plugin(plm, {errorMessages: {
+  UserExistsError: "This username is already taken."
+}});
 const User = mongoose.model("User", userSchema);
 module.exports = User;
+
+
+// TO BE IMPLIMENTED!
+// firstName: {
+//   type: String,
+//   minlength: 2,
+//   maxlength: 30
+// },
+// lastName: {
+//   type: String,
+//   minlength: 2,
+//   maxlength: 30
+// },
+// bio: {
+//   type: String
+// },
+// contacts: {
+//   type: String
+// },
+// pendingInvites: {
+//   type: String
+// },
+// location: {
+//   type: String
+// },
+// title: {
+//   type: String
+// },
+// website: {
+//   type: String
+// },
+// profilePictureUrl: {
+//   type: String
+// }
