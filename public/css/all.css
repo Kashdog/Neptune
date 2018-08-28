@@ -1,4 +1,274 @@
-.logout {
+  .material {
+    width: 100%;
+  }
+  .material div {
+    position: relative;
+    width: 100%;
+    padding-top: 18px;
+  }
+  .material label {
+    transition: all 150ms ease-out;
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    display: block;
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 4px;
+    font-weight: 500;
+    color: #05abe0;
+    line-height: 1.5;
+  }
+  .material hr {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border: 0;
+    border-radius: 4px;
+    margin: 0;
+    background: #ebebeb;
+  }
+  .material hr:after {
+    transition: all 150ms ease-out;
+    -webkit-transform: scaleX(0) translateZ(0);
+            transform: scaleX(0) translateZ(0);
+    -webkit-transform-origin: left top;
+            transform-origin: left top;
+    will-change: transform;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: #05abe0;
+  }
+  .material input {
+    display: block;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    position: relative;
+    z-index: 1;
+    padding: 0 0 4px;
+    margin: 0;
+    width: 100%;
+    background: none;
+    color: #3f4159;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .material input:focus + label, .material input:valid + label {
+    -webkit-transform: translateY(-24px) translateZ(0);
+            transform: translateY(-24px) translateZ(0);
+    font-size: 12px;
+  }
+  .material input:focus ~ hr:after {
+    -webkit-transform: scaleX(1) translateZ(0);
+            transform: scaleX(1) translateZ(0);
+  }
+  
+  .material-checkbox div {
+    position: relative;
+  }
+  .material-checkbox .check {
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+  .material-checkbox span {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    background: #ebebeb;
+  }
+  .material-checkbox svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .material-checkbox line {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.5);
+    stroke-width: 2px;
+    stroke-linecap: round;
+  }
+  .material-checkbox g:last-child line {
+    stroke: white;
+    opacity: 0;
+  }
+  .material-checkbox g:last-child line:first-child {
+    transition: stroke-dashoffset 100ms ease-out;
+    stroke-dasharray: 6.708;
+    stroke-dashoffset: 6.708;
+  }
+  .material-checkbox g:last-child line:last-child {
+    transition: stroke-dashoffset 200ms ease-out 100ms;
+    stroke-dasharray: 14.873;
+    stroke-dashoffset: 14.873;
+  }
+  .material-checkbox label {
+    margin-left: 6px;
+  }
+  .material-checkbox input {
+    cursor: pointer;
+    opacity: 0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+  .material-checkbox input:checked + div span {
+    background: #05abe0;
+  }
+  .material-checkbox input:checked + div g:last-child line {
+    opacity: 1;
+  }
+  .material-checkbox input:checked + div g:last-child line:first-child {
+    stroke-dashoffset: 0;
+  }
+  .material-checkbox input:checked + div g:last-child line:last-child {
+    stroke-dashoffset: 0;
+  }
+  
+  .material-button {
+    width: 100%;
+  }
+  .material-button div {
+    width: 100%;
+  }
+  .material-button button, .material-button input[type="submit"] {
+    margin: 0;
+    border: 0;
+    border-radius: 2px;
+    padding: 6px 12px;
+    background: #ebebeb;
+    color: #3f4159;
+    font-size: 16px;
+    transition: all 150ms ease-out;
+  }
+  .material-button button:hover, .material-button button:focus, .material-button input[type="submit"]:hover, .material-button input[type="submit"]:focus {
+    background: #cd908b;
+    color: white;
+  }
+  .material-button button:active, .material-button input[type="submit"]:active {
+    transition: all 150ms ease-in;
+    background: #3f4159;
+  }
+  .material-button button.save, .material-button input[type="submit"].save {
+    width: 100%;
+    max-width: 256px;
+    padding: 12px 24px;
+    background: #05abe0;
+    color: white;
+    font-size: 18px;
+  }
+  .material-button button.save:hover, .material-button button.save:focus, .material-button input[type="submit"].save:hover, .material-button input[type="submit"].save:focus {
+    background: #05abe0;
+  }
+  .material-button button.save:active, .material-button input[type="submit"].save:active {
+    background: #3f4159;
+  }
+  @media only screen and (max-height: 444px) {
+    .material-button button.save, .material-button input[type="submit"].save {
+      display: none;
+    }
+  }
+  .material-button button.connect, .material-button input[type="submit"].connect {
+    display: block;
+    width: 100%;
+    border-radius: 1000px;
+    color: white;
+  }
+  .material-button button.gh, .material-button input[type="submit"].gh {
+    background: #4183c4;
+  }
+  .material-button button.gh:hover, .material-button button.gh:focus, .material-button input[type="submit"].gh:hover, .material-button input[type="submit"].gh:focus {
+    background: #7ba9d6;
+  }
+  .material-button button.gh.connected, .material-button input[type="submit"].gh.connected {
+    background: #ebebeb;
+    color: #343434;
+  }
+  .material-button button.gh.connected:hover, .material-button button.gh.connected:focus, .material-button input[type="submit"].gh.connected:hover, .material-button input[type="submit"].gh.connected:focus {
+    background: #4183c4;
+    color: white;
+  }
+  .material-button button.gh:active, .material-button input[type="submit"].gh:active {
+    background: #2c5d8d !important;
+  }
+  .material-button button.tw, .material-button input[type="submit"].tw {
+    background: #2daae1;
+  }
+  .material-button button.tw:hover, .material-button button.tw:focus, .material-button input[type="submit"].tw:hover, .material-button input[type="submit"].tw:focus {
+    background: #70c5eb;
+  }
+  .material-button button.tw.connected, .material-button input[type="submit"].tw.connected {
+    background: #ebebeb;
+    color: #343434;
+  }
+  .material-button button.tw.connected:hover, .material-button button.tw.connected:focus, .material-button input[type="submit"].tw.connected:hover, .material-button input[type="submit"].tw.connected:focus {
+    background: #2daae1;
+    color: white;
+  }
+  .material-button button.tw:active, .material-button input[type="submit"].tw:active {
+    background: #187da9 !important;
+  }
+  .material-button button.fb, .material-button input[type="submit"].fb {
+    background: #3b5997;
+  }
+  .material-button button.fb:hover, .material-button button.fb:focus, .material-button input[type="submit"].fb:hover, .material-button input[type="submit"].fb:focus {
+    background: #5e7ec0;
+  }
+  .material-button button.fb.connected, .material-button input[type="submit"].fb.connected {
+    background: #ebebeb;
+    color: #343434;
+  }
+  .material-button button.fb.connected:hover, .material-button button.fb.connected:focus, .material-button input[type="submit"].fb.connected:hover, .material-button input[type="submit"].fb.connected:focus {
+    background: #3b5997;
+    color: white;
+  }
+  .material-button button.fb:active, .material-button input[type="submit"].fb:active {
+    background: #263960 !important;
+  }
+  .material-button button.li, .material-button input[type="submit"].li {
+    background: #069;
+  }
+  .material-button button.li:hover, .material-button button.li:focus, .material-button input[type="submit"].li:hover, .material-button input[type="submit"].li:focus {
+    background: #0099e6;
+  }
+  .material-button button.li.connected, .material-button input[type="submit"].li.connected {
+    background: #ebebeb;
+    color: #343434;
+  }
+  .material-button button.li.connected:hover, .material-button button.li.connected:focus, .material-button input[type="submit"].li.connected:hover, .material-button input[type="submit"].li.connected:focus {
+    background: #069;
+    color: white;
+  }
+  .material-button button.li:active, .material-button input[type="submit"].li:active {
+    background: #00334d !important;
+  }
+  .material-button.center div {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .logout {
     width: 10%;
     top: 5%;
     right: 5%;
