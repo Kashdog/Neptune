@@ -647,6 +647,23 @@ section.upcoming h1 {
     border-color: #4060A5; /* change the border color on mouse hover */
 }
 
+/* github button class*/
+.githubBtn{
+  background: #000;
+}
+
+.githubBtn:before{
+    font-family: "FontAwesome";
+    content: "\f09b"; /* add github icon */
+    
+}
+
+.githubBtn:hover{
+    color: #000;
+    background: #fff;
+    border-color: #000;
+}
+
 /* twitter button class*/
 .twitterBtn{
     background: #00ABE3;
