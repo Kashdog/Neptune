@@ -30,7 +30,11 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, "A phone number is required."]
-  }
+  },
+  facebook         : {
+    id           : String,
+    token        : String
+  },
 });
 
 userSchema.plugin(plm, {errorMessages: {

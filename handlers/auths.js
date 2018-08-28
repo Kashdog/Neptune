@@ -80,3 +80,37 @@ exports.logout = async (req, res, next) => {
     return next(err);
   }
 }
+
+exports.facebook = (req, res, next) => {
+  passport.authenticate('facebook', { scope : ['public_profile', 'email'] }, function (error, user, info){
+    console.log(error);
+    console.log(user);
+    console.log(info);
+
+    if (error) {
+      res.status(401).send(error);
+    } else if (!user) {
+      res.status(401).send(info);
+    } else {
+      next();
+    }
+
+    res.status(401).send(info);
+  })(req, res);
+}
+
+exports.facebookcallback = (req, res, next) => {
+  passport.authenticate('facebook', { 
+    successRedirect: '/user',
+    failureRedirect: '/signin' }, function (error, user, info){
+      if (error) {
+        res.status(401).send(error);
+      } else if (!user) {
+        res.status(401).send(info);
+      } else {
+        next();
+      }
+  
+      res.status(401).send(info);                               
+  })(req, res);
+}
