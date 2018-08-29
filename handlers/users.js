@@ -1,9 +1,28 @@
-exports.index = (req, res, next) => {
-  res.render("profile")
+const db = require('../models');
+
+exports.index = async (req, res, next) => {
+  try {
+    res.render("profile")
+  } catch(err) {
+    return next(err);
+  }
+  
 }
 
-exports.edit = (req, res, next) => {
-  res.render("createprofile")
+exports.edit = async (req, res, next) => {
+  try {
+    res.render("createprofile")
+  } catch(err) {
+    return next(err);
+  }
+}
+
+exports.update = async (req, res, next) => {
+  try {
+
+  } catch(err) {
+    return next(err);
+  }
 }
 
 module.exports = exports;

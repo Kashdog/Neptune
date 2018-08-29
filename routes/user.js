@@ -8,5 +8,6 @@ router.route("/")
 
 router.route("/edit")
   .get(handler.edit)
+  .post(handler.update)
 
 module.exports = router;

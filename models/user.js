@@ -31,10 +31,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "A phone number is required."]
   },
-  facebook         : {
-    id           : String,
-    token        : String
+  facebook: {
+    id: String,
+    token: String
   },
+  location: {
+  type: String
+  },
+  title: {
+    type: String
+  },
+  github: {
+    type: String
+  },
+  linkedin: {
+    type: String
+  }
 });
 
 userSchema.plugin(plm, {errorMessages: {
@@ -70,9 +82,9 @@ module.exports = User;
 // title: {
 //   type: String
 // },
-// website: {
+// github: {
 //   type: String
 // },
-// profilePictureUrl: {
+// linkedin: {
 //   type: String
 // }
