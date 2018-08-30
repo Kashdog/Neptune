@@ -53,7 +53,7 @@
   <span class='nav'>Create a Card</span>
   <main class='content'>
     <section id='profile'>
-      <form>
+      <form action="/user/edit" method="POST">
         <ul>
           <li class='large padding avatar'>
             <img height="60px" width="60px">
@@ -69,7 +69,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' name="name">
                 <label>Name</label>
                 <hr>
               </div>
@@ -78,7 +78,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' name="location">
                 <label>Location</label>
                 <hr>
               </div>
@@ -87,7 +87,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' name="title">
                 <label>Title</label>
                 <hr>
               </div>
@@ -96,7 +96,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='number'>
+                <input required type='number' name="phonenumber">
                 <label>Phone number</label>
                 <hr>
               </div>
@@ -105,7 +105,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' name="github">
                 <label>Github</label>
                 <hr>
               </div>
@@ -114,7 +114,7 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text'>
+                <input required type='text' name="linkedin">
                 <label>Linkedin</label>
                 <hr>
               </div>
