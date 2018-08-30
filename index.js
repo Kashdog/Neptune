@@ -111,6 +111,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.use('/user', authMW.isValidated, require('./routes/user'));
 app.use('/auth', require('./routes/auth'));
+app.use('/contacts', authMW.isValidated, require('./routes/contacts'))
 
 // create route for '/' and render the 'index.ejs' file to the browser
 app.get('/', (req, res, next) => {

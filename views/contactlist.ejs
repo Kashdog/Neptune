@@ -80,17 +80,19 @@ Codepen: https://codepen.io/supah/
     <input class="radio" type="radio" name="gender" value="invites"> Invites
   </form>
   <section class="movies">
-    <div class="movie">
-      <img src="goa.jpg" width="150px" height="200px" alt="" class="poster" />
-      <div class="title">Aneesh Kashalikar</div>
-      <div class="info">
-        <span class="length">Bit Alchemist at IBM</span>
-        <br>
-        <span class="year">Greater Boston</span>
-      </div>
-      <div class="desc">
-          I am a bit alchemist with passion for understanding the inner workings of Computation. specifically: Software Engineering, Machine Learning, and Computational Computational Neuroscience</div>
-    </div>
+      <% users.forEach(function (user) { %>
+        <div class="movie">
+          <img src="goa.jpg" width="150px" height="200px" alt="" class="poster" />
+          <div class="title"><%= user.name %></div>
+          <div class="info">
+            <span class="length"><%= user.title %></span>
+            <br>
+            <span class="year"><%= user.location %></span>
+          </div>
+          <div class="desc">
+              I am a bit alchemist with passion for understanding the inner workings of Computation. specifically: Software Engineering, Machine Learning, and Computational Computational Neuroscience</div>
+        </div>                                  
+    <% }) %>
   </section>
   <div class="detail">
     <svg class="close">
