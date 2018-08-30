@@ -81,32 +81,33 @@ Codepen: https://codepen.io/supah/
   </form>
   <section class="movies">
       <% users.forEach(function (user) { %>
-        <div class="movie">
-          <img src="goa.jpg" width="150px" height="200px" alt="" class="poster" />
-          <div class="title"><%= user.name %></div>
-          <div class="info">
-            <span class="length"><%= user.title %></span>
-            <br>
-            <span class="year"><%= user.location %></span>
-          </div>
-          <div class="desc">
-              I am a bit alchemist with passion for understanding the inner workings of Computation. specifically: Software Engineering, Machine Learning, and Computational Computational Neuroscience</div>
-        </div>                                  
+          <form id="connect" class="movie" method="POST" action="/contacts/connect">
+            <input type="hidden" name="username" value="<%= user.username %>">
+            <img src="goa.jpg" width="150px" height="200px" alt="" class="poster" />
+            <div class="title"><%= user.name %></div>
+            <div class="info">
+              <span class="length"><%= user.title %></span>
+              <br>
+              <span class="year"><%= user.location %></span>
+            </div>
+            <div class="desc">
+                I am a bit alchemist with passion for understanding the inner workings of Computation. specifically: Software Engineering, Machine Learning, and Computational Computational Neuroscience</div>
+          </form>                             
     <% }) %>
   </section>
   <div class="detail">
     <svg class="close">
       <use xlink:href="#close"></use>
     </svg>
-    <div class="movie">
+    <form id="connect" class="movie" method="POST" action="/contacts/connect">
 
-      <button class="play">
+      <button form="connect" type="submit" value="Submit" class="play">
       Connect
       </button>
 
 
 
-    </div>
+    </form>
   </div>
 </div>
 

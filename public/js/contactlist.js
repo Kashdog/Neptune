@@ -3,6 +3,7 @@ var $play = $('.play'),
     $movie = $('.movie', $detail),
     $close = $('.close');
 
+
 $('.movies .movie').click(function(){
   $movie.html($(this).html());
   $play.appendTo($movie);
@@ -65,20 +66,12 @@ $('body').click(function(e){
   if ($p.is('.radio')){
     return true;
   }
+  else if ($p.is('.detail')){
+    return true;
+  }
   else if ($p.is('.app')){
     return false;
   } else {
     close();
   }
 })
-
-
-/*--------------------
-CodePen Thumbnail
---------------------*/
-setTimeout(function(){
-  $('.movie:eq(0)').click();
-}, 300);
-setTimeout(function(){
-  close();
-},1700);

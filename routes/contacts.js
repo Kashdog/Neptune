@@ -6,7 +6,7 @@ const express  = require("express"),
 router.route("/")
   .get(handler.index)
 
-/*router.route("/connect")
-  .post(handler.connect)*/
+router.route("/connect/")
+  .post(handler.connect)
 
 module.exports = router;

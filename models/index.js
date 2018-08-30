@@ -6,3 +6,4 @@ mongoose.connect("mongodb://localhost:27017/janus", {
 });
 
 module.exports.User = require("./user");
+module.exports.Connection = require("./connection");
