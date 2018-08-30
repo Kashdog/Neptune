@@ -2,7 +2,7 @@ const db = require('../models');
 
 exports.index = async (req, res, next) => {
   try {
-    res.render("profile", {name: req.user.name, title: req.user.title})
+    res.render("profile", {name: req.user.name, title: req.user.title, phonenumber: req.user.phone, email: req.user.email})
   } catch(err) {
     return next(err);
   }

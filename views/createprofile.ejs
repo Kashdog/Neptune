@@ -6,6 +6,10 @@
   <title>Dastan</title>
   <script src="https://use.typekit.net/lkh0ago.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="icon" href="../ruby.png" type="image/x-icon" />
     <link rel="stylesheet" href="../css/style2.css">
@@ -53,18 +57,33 @@
   <span class='nav'>Create a Card</span>
   <main class='content'>
     <section id='profile'>
-      <form action="/user/edit" method="POST">
+      <form action="/user/edit" enctype="multipart/form-data" method="POST">
         <ul>
           <li class='large padding avatar'>
-            <img height="60px" width="60px">
-                  <div class="file_input_div">
-                    <div class="file_input">
-                      <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
-                        <i class="material-icons">file_upload</i>
-                        <input id="file_input_file" class="none" type="file" />
-                      </label>
-                    </div>
-                  </div>
+            <fieldset class='material'>
+              <label>Profile Picture</label>
+            </fieldset>
+            <img id="profilepicimg" height="60px" width="60px" style="width: 360px;">
+            <div class="file_input_div">
+              <div class="file_input">
+                <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                  <i class="material-icons">file_upload</i>
+                  <input id="profilepicinput" class="none" type="file" name="profilepic"/>
+                </label>
+              </div>
+            </div>
+            <fieldset class='material'>
+              <label>Resume</label>
+            </fieldset>
+            <img height="60px" width="60px" style="width: 360px;">
+            <div class="file_input_div">
+              <div class="file_input">
+                <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                  <i class="material-icons">file_upload</i>
+                  <input id="resumeinput" class="none" type="file" name="resume"/>
+                </label>
+              </div>
+            </div>
           </li>
           <li>
             <fieldset class='material'>
@@ -141,35 +160,6 @@
 
     <script  src="../js/settings.js"></script>
     <script>
-    var fileInputTextDiv = document.getElementById('file_input_text_div');
-var fileInput = document.getElementById('file_input_file');
-var fileInputText = document.getElementById('file_input_text');
-
-fileInput.addEventListener('change', changeInputText);
-fileInput.addEventListener('change', changeState);
-
-function changeInputText() {
-  var str = fileInput.value;
-  var i;
-  if (str.lastIndexOf('\\')) {
-    i = str.lastIndexOf('\\') + 1;
-  } else if (str.lastIndexOf('/')) {
-    i = str.lastIndexOf('/') + 1;
-  }
-  fileInputText.value = str.slice(i, str.length);
-}
-
-function changeState() {
-  if (fileInputText.value.length != 0) {
-    if (!fileInputTextDiv.classList.contains("is-focused")) {
-      fileInputTextDiv.classList.add('is-focused');
-    }
-  } else {
-    if (fileInputTextDiv.classList.contains("is-focused")) {
-      fileInputTextDiv.classList.remove('is-focused');
-    }
-  }
-}
 </script>
 
 
