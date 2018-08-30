@@ -118,6 +118,21 @@ app.get('/', (req, res, next) => {
   res.render('index')
 });
 
+// ***** File Uploads *****
+
+var jqupload = require('jquery-file-upload-middleware');
+
+app.use('/upload', function(req, res, next){
+    jqupload.fileHandler({
+        uploadDir: function(){
+            return __dirname + '/public/uploads/' + req.user.username;
+        },
+        uploadUrl: function(){
+            return '/uploads/' + req.user.username;
+        },
+    })(req, res, next);
+});
+
 // 404 Error Generator
 app.use((req, res, next) => {
   let err = new Error('Oops! Page could not be located.');

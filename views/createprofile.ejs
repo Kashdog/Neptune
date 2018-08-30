@@ -6,11 +6,7 @@
   <title>Dastan</title>
   <script src="https://use.typekit.net/lkh0ago.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="icon" href="../ruby.png" type="image/x-icon" />
     <link rel="stylesheet" href="../css/style2.css">
     <link rel="stylesheet" href="../css/all.css">
@@ -58,6 +54,7 @@
   <main class='content'>
     <section id='profile'>
       <form action="/user/edit" method="POST">
+        <input id="profilepichidden" type="hidden" name="profilepic" value="">
         <ul>
           <li class='large padding avatar'>
             <fieldset class='material'>
@@ -68,7 +65,7 @@
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
                   <i class="material-icons">file_upload</i>
-                  <input id="profilepicinput" class="none" type="file" name="profilepic"/>
+                  <input id="profilepicinput" accept="image/*" class="none" type="file" data-url="/upload"/>
                 </label>
               </div>
             </div>
@@ -146,7 +143,7 @@
           <li class='large padding'>
             <fieldset class='material-button center'>
               <div>
-                <input class='save' type='submit' value='Save'>
+                <input id="save" class='save' type='submit' value='Save'>
               </div>
             </fieldset>
           </li>
@@ -159,8 +156,29 @@
   
 
     <script  src="../js/settings.js"></script>
-    <script>
-</script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="../js/jquery.ui.widget.js"></script>
+  <script src="../js/jquery.iframe-transport.js"></script>
+  <script src="../js/jquery.fileupload.js"></script>
+  <script>
+        $(document).ready(function(){
+
+            $('#profilepicinput').fileupload({
+                dataType: 'json',
+                done: function(e, data){
+                    $.each(data.result.files, function(index, file){
+                      console.log(file['name']);
+                      document.getElementById('profilepichidden').value = file['name'];
+                      console.log($(document.getElementById('profilepichidden').value));
+                    });
+                }
+            });
+
+        });
+    </script>
 
 
 

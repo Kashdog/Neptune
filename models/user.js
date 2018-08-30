@@ -49,6 +49,9 @@ const userSchema = new mongoose.Schema({
   },
   linkedin: {
     type: String
+  },
+  profilepic: {
+    type: String
   }
 });
 

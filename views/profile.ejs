@@ -33,11 +33,11 @@
 
   <main class='profile' ontouchstart>
   <div class='background'></div>
-  <aside class='avatar'></aside>
+  <aside class='avatar' style="background: url('../uploads/<%= username %>/<%= profilepic %>') no-repeat top center/cover;"></aside>
   <section class='info'>
     <h1><%= name %></h1>
     <h2><%= title %></h2>
-    <a class='follow'>+ Connect</a>
+    <a class='follow'><%= location %></a>
     <ul>
       <li>
         <a class='link portfolio' href="tel:<%= phonenumber %>" target='_blank'>
