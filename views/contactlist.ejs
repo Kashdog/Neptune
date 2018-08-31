@@ -58,15 +58,6 @@
 
 <body>
 
-  <!--
-
-Follow me on
-Dribbble: https://dribbble.com/supahfunk
-Twitter: https://twitter.com/supahfunk
-Codepen: https://codepen.io/supah/
-
--->
-
 <div class="app">
   <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
   <header>
@@ -84,15 +75,14 @@ Codepen: https://codepen.io/supah/
       <% users.forEach(function (user) { %>
           <form id="connect" class="movie" method="POST" action="/contacts/connect">
             <input type="hidden" name="username" value="<%= user.username %>">
-            <img src="goa.jpg" width="150px" height="200px" alt="" class="poster" />
+            <img src="uploads/<%= user.username %>/<%= user.profilepic %>" width="150px" height="200px" alt="" class="poster" />
             <div class="title"><%= user.name %></div>
             <div class="info">
               <span class="length"><%= user.title %></span>
               <br>
               <span class="year"><%= user.location %></span>
             </div>
-            <div class="desc">
-                I am a bit alchemist with passion for understanding the inner workings of Computation. specifically: Software Engineering, Machine Learning, and Computational Computational Neuroscience</div>
+            <div class="desc"><%= user.bio %></div>
           </form>                             
     <% }) %>
   </section>
