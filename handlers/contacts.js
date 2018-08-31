@@ -4,7 +4,14 @@ exports.index = async (req, res, next) => {
     try {
         db.User.find({}).exec(function(err, users) {   
             if (err) throw err;
-            res.render('contactlist.ejs', { "users": users });
+            var allusersexceptcurrent = [];
+            for(var i = 0; i < users.length; i++){
+                if(users[i].username != req.user.username){
+                    allusersexceptcurrent.push(users[i]);
+                }
+            }
+            console.log(allusersexceptcurrent);
+            res.render('contactlist.ejs', { "users": allusersexceptcurrent });
         });
     } catch(err) {
       return next(err);
@@ -14,7 +21,16 @@ exports.index = async (req, res, next) => {
 
 exports.changeView = async (req, res, next) => {
     try{
-        console.log(req.body);
+        console.log(req.body.view);
+        if (req.body.view == "all"){
+            res.redirect("/contacts");
+        } 
+        else if(req.body.view == "incontacts"){
+
+        }
+        else if (req.body.view == "invites"){
+            
+        }
     } catch(err) {
         return next(err);
     }
