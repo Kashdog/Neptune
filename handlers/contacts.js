@@ -12,6 +12,14 @@ exports.index = async (req, res, next) => {
     
 }
 
+exports.changeView = async (req, res, next) => {
+    try{
+        console.log(req.body);
+    } catch(err) {
+        return next(err);
+    }
+}
+
 exports.connect = async (req, res, next) => {
     try {
         console.log(req.body);

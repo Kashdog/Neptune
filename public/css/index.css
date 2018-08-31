@@ -268,6 +268,25 @@ a.link.github:active {
   box-shadow: inset 0 0 10px rgba(56, 118, 180, 0.5);
 }
 
+a.link.resume {
+  background: #4164c4;
+  background: linear-gradient(135deg, #83a0f1 0%, #0480fd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#41adc4', endColorstr='#4183c4',GradientType=1 );
+  box-shadow: inset 0 0 10px rgba(65, 131, 196, 0.5);
+}
+a.link.resume:hover, a.link.resume:focus {
+  background: #54b5ca;
+  background: linear-gradient(135deg, #8aa9ff 0%, #389cff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='lighten(#41adc4, 5%)', endColorstr='lighten(#4183c4, 5%)',GradientType=1 );
+  box-shadow: inset 0 0 10px rgba(84, 144, 202, 0.5);
+}
+a.link.resume:active {
+  background: #389eb4;
+  background: linear-gradient(135deg, #9ab4fa 0%, #4b88fa 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='darken(#41adc4, 5%)', endColorstr='darken(#4183c4, 5%)',GradientType=1 );
+  box-shadow: inset 0 0 10px rgba(56, 118, 180, 0.5);
+}
+
 @media only screen and (min-width: 470px) {
   .profile {
     display: flex;
@@ -933,6 +952,24 @@ a.link.github:active {
   margin-top: -25px;
 }
 .icons .email-icon i {
+  font-size: 21px;
+  color: white;
+  cursor: pointer;
+}
+
+.icons .resume-icon {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+  order: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: rgb(50, 193, 236);
+  border-radius: 50%;
+  margin-top: -25px;
+}
+.icons .resume-icon i {
   font-size: 21px;
   color: white;
   cursor: pointer;

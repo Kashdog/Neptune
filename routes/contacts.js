@@ -5,6 +5,7 @@ const express  = require("express"),
 
 router.route("/")
   .get(handler.index)
+  .post(handler.changeView)
 
 router.route("/connect/")
   .post(handler.connect)

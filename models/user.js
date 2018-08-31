@@ -52,6 +52,12 @@ const userSchema = new mongoose.Schema({
   },
   profilepic: {
     type: String
+  },
+  resume: {
+    type: String
+  },
+  bio: {
+    type: String
   }
 });
 

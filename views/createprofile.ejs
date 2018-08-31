@@ -55,6 +55,7 @@
     <section id='profile'>
       <form action="/user/edit" method="POST">
         <input id="profilepichidden" type="hidden" name="profilepic" value="">
+        <input id="resumehidden" type="hidden" name="resume" value="">
         <ul>
           <li class='large padding avatar'>
             <fieldset class='material'>
@@ -77,7 +78,7 @@
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
                   <i class="material-icons">file_upload</i>
-                  <input id="resumeinput" class="none" type="file" name="resume"/>
+                  <input id="resumeinput" class="none" type="file" data-url="/upload"//>
                 </label>
               </div>
             </div>
@@ -137,7 +138,7 @@
             </fieldset>
           </li>
           <li>
-                <textarea spellcheck="false" class="hwt-input hwt-content">Type in your biography
+                <textarea required name="bio" spellcheck="false" class="hwt-input hwt-content">Type in your biography
                 </textarea>
           </li>   
           <li class='large padding'>
@@ -173,6 +174,16 @@
                       console.log(file['name']);
                       document.getElementById('profilepichidden').value = file['name'];
                       console.log($(document.getElementById('profilepichidden').value));
+                    });
+                }
+            });
+            $('#resumeinput').fileupload({
+                dataType: 'json',
+                done: function(e, data){
+                    $.each(data.result.files, function(index, file){
+                      console.log(file['name']);
+                      document.getElementById('resumehidden').value = file['name'];
+                      console.log($(document.getElementById('resumehidden').value));
                     });
                 }
             });
