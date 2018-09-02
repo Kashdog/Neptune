@@ -2,11 +2,12 @@ var $play = $('.play'),
     $detail  = $('.detail'),
     $movie = $('.movie', $detail),
     $close = $('.close');
-
+    $play.hide();
 
 $('.movies .movie').click(function(){
   $movie.html($(this).html());
   $play.appendTo($movie);
+  $play.show();
 
   $poster = $('.poster', this).addClass('active');
 
@@ -47,6 +48,7 @@ function close(){
   console.log('asd');
   $p = $('.detail .poster');
   console.log($p)
+  $play.hide();
   $p.css({
     top: $p.data('top'),
     left: $p.data('left'),

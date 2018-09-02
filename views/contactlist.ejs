@@ -84,6 +84,9 @@
               <span class="year"><%= user.location %></span>
             </div>
             <div class="desc"><%= user.bio %></div>
+            <button type="submit" value="Submit" class="play">
+              Connect
+              </button>
           </form>                             
     <% }) %>
   </section>
@@ -93,9 +96,7 @@
     </svg>
     <form id="connect" class="movie" method="POST" action="/contacts/connect">
 
-      <button form="connect" type="submit" value="Submit" class="play">
-      Connect
-      </button>
+      
 
 
 
