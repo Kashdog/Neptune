@@ -61,7 +61,7 @@
             <fieldset class='material'>
               <label>Profile Picture</label>
             </fieldset>
-            <img id="profilepicimg" height="60px" width="60px" style="width: 360px;">
+            <img id="profilepicimg" style="width: 360px; height: 60px;" alt="" class="poster">
             <div class="file_input_div">
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
@@ -73,7 +73,7 @@
             <fieldset class='material'>
               <label>Resume</label>
             </fieldset>
-            <img height="60px" width="60px" style="width: 360px;">
+            <img id="resumeimg" height="60px" width="60px" style="width: 360px;">
             <div class="file_input_div">
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
@@ -173,7 +173,8 @@
                     $.each(data.result.files, function(index, file){
                       console.log(file['name']);
                       document.getElementById('profilepichidden').value = file['name'];
-                      console.log($(document.getElementById('profilepichidden').value));
+                      console.log(document.getElementById('profilepichidden').value);
+                      $("#profilepicimg").attr("src","uploads/<%= user.username %>/"+file['name']);
                     });
                 }
             });
@@ -183,7 +184,7 @@
                     $.each(data.result.files, function(index, file){
                       console.log(file['name']);
                       document.getElementById('resumehidden').value = file['name'];
-                      console.log($(document.getElementById('resumehidden').value));
+                      console.log(document.getElementById('resumehidden').value);
                     });
                 }
             });
