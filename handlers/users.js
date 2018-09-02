@@ -12,7 +12,7 @@ exports.index = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
   try {
-    res.render("createprofile")
+      res.render('createprofile', { "user": req.user });
   } catch(err) {
     return next(err);
   }
