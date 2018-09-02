@@ -110,6 +110,7 @@ app.use(express.static(__dirname + '/public'))
 
 //  ***** All routes will go here. *****
 
+app.use('/menu', authMW.isValidated, require('./routes/menu'));
 app.use('/user', authMW.isValidated, require('./routes/user'));
 app.use('/auth', require('./routes/auth'));
 app.use('/contacts', authMW.isValidated, require('./routes/contacts'))

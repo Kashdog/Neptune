@@ -133,7 +133,7 @@ function redirect(o) {
     window.location.href = "../settings/createprofile.html";
   }
   if (id == "#portfolio") {
-    window.location.href = "../contactlist/index.html";
+    window.location.href = "../contacts";
   }
 }
  document.getElementById("cloud").onclick = function(){

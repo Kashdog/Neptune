@@ -16,6 +16,7 @@ pending: {
     type: Boolean,
     required: [true, "A pending status is required."]
 }
-});     
+}); 
+
 const Connection = mongoose.model("Connection", connectionSchema);
 module.exports = Connection;
