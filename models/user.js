@@ -1,7 +1,8 @@
 const mongoose = require("mongoose"),
       validate = require("validator"),
       plm      = require("passport-local-mongoose"),
-      db       = require("./index");
+      db       = require("./index"),
+      conn     = require("./connection");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -9,12 +10,16 @@ const userSchema = new mongoose.Schema({
     required: [true, "An email address is required."],
     validate: {
       validator: async function(val) {
-        let existingEmail = await db.User.findOne({email: val}) 
-        if (!existingEmail){
-          return true;
-        } else {
-          return false;
-        }
+        try {
+          let existingEmail = await db.User.findOne({email: val}) 
+          if (!existingEmail){
+            return true;
+          } else {
+            return false;
+          }
+        } catch (err) {
+          return next(err);
+        }        
       },
       name: "EmailExistsError",
       message: "This email address is already taken."
@@ -34,12 +39,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "A phone number is required."]
   },
+  connections: {
+    type: [mongoose.Schema.type.sender],
+    ref: "Connection"
+  },
   facebook: {
     id: String,
     token: String
   },
   location: {
-  type: String
+    type: String
   },
   title: {
     type: String
@@ -66,37 +75,3 @@ userSchema.plugin(plm, {errorMessages: {
 }});
 const User = mongoose.model("User", userSchema);
 module.exports = User;
-
-
-// TO BE IMPLIMENTED!
-// firstName: {
-//   type: String,
-//   minlength: 2,
-//   maxlength: 30
-// },
-// lastName: {
-//   type: String,
-//   minlength: 2,
-//   maxlength: 30
-// },
-// bio: {
-//   type: String
-// },
-// contacts: {
-//   type: String
-// },
-// pendingInvites: {
-//   type: String
-// },
-// location: {
-//   type: String
-// },
-// title: {
-//   type: String
-// },
-// github: {
-//   type: String
-// },
-// linkedin: {
-//   type: String
-// }
