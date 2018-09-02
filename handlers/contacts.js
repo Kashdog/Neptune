@@ -38,24 +38,22 @@ exports.changeView = async (req, res, next) => {
 
 exports.connect = async (req, res, next) => {
     try {
-          const target = req.body.username;
-
-          const connection = await new db.Connection({
+          console.log(req.body.username);
+          let connection = {
             sender: req.user.username,
-            receiver: target,
+            receiver: req.body.username,
             pending: true
-          }, function(err, connection){
-              if (!err){
-                  console.log(connection);
-              } else {
-                  console.log(err);
-                  return next(err);
-              }
-          });
+          }
 
-          let requestSubmission = await db.User.findOneAndUpdate({username: target}, {$set:{
-            connections: connection
-          }});
+
+          let requestSubmission = await db.User.findOneAndUpdate({
+            username: req.body.username}, 
+            {
+                $push:{
+                    connections: connection
+                }
+            }
+        );
 
           console.log("Connection submitted.");
     

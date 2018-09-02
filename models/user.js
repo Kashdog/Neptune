@@ -4,6 +4,21 @@ const mongoose = require("mongoose"),
       db       = require("./index"),
       conn     = require("./connection");
 
+const connectionSchema = new mongoose.Schema({
+  sender: {
+    type: String,
+    required: [true, "A sender is required."]
+  },
+  receiver: {
+      type: String,
+      required: [true, "A receiver is required."]
+  },
+  pending: {
+      type: Boolean,
+      required: [true, "A pending status is required."]
+  }
+});
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -39,7 +54,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "A phone number is required."]
   },
-  stories : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Connection' }],
+  connections : [connectionSchema],
   facebook: {
     id: String,
     token: String
