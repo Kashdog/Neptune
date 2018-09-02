@@ -39,10 +39,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "A phone number is required."]
   },
-  connections: {
-    type: [mongoose.Schema.type.sender],
-    ref: "Connection"
-  },
+  stories : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Connection' }],
   facebook: {
     id: String,
     token: String

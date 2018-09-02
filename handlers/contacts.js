@@ -40,7 +40,7 @@ exports.connect = async (req, res, next) => {
     try {
           const target = req.body.username;
 
-          const connection = await new db.Connection.create({
+          const connection = await new db.Connection({
             sender: req.user.username,
             receiver: target,
             pending: true
