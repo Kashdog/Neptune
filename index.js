@@ -5,13 +5,20 @@ const express    = require('express'),
       passport   = require('passport'),
       session    = require('express-session'),
       localStrat = require('passport-local'),
-      db         = require("./models"),
-      authMW     = require("./middleware/auth"),
       FacebookStrategy = require('passport-facebook').Strategy;
+
+      const neo4j = require('neo4j-driver').v1;
+      var uuid = require('node-uuid');
+      var randomstring = require("randomstring");
+      var _ = require('lodash');
+      var crypto = require('crypto');
+
+      
 
 // App settings.
 app.use(session({
-  secret: "russelWANTEDdekANDaneeshWANTEDjanusWHOwillWIN?weDONTknow!",
+  path: "/",
+  secret: "feanarocurufinweartanaroereinioingilgalad",
   resave: false,
   saveUninitialized: false
 }));
@@ -19,87 +26,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.use(new localStrat(db.User.authenticate()));
-passport.serializeUser(db.User.serializeUser());
-passport.deserializeUser(db.User.deserializeUser());
-
-passport.use(new FacebookStrategy({
-  clientID: '972236806317053',
-  clientSecret: '81601ccaa600a06af0bd176443490473',
-  callbackURL: "/auth/facebook/callback",
-  profileURL: 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
-  profileFields   : ['id', 'email', 'name'],
-  passReqToCallback : true
-  
-},
-function(req, token, refreshToken, profile, done) {
-
-    // asynchronous
-    process.nextTick(function() {
-
-        // check if the user is already logged in
-        if (!req.user) {
-
-            db.User.findOne({ 'email' : (profile.emails[0].value || '').toLowerCase()}, function(err, user) {
-                if (err)
-                    return done(err);
-
-                if (user) {
-
-                    // if there is a user id already but no token (user was linked at one point and then removed)
-                    if (!user.facebook.token) {
-                      
-                        user.facebook.token = token;
-                        user.email = (profile.emails[0].value || '').toLowerCase();
-
-                        user.save(function(err) {
-                            if (err){
-                              console.log("tolkien save error");
-                              return done(err);
-                            }
-                                
-                            return done(null, user);
-                        });
-                    }
-
-                    return done(null, user); // user found, return that user
-                } else {
-                    // if there is no user, create them
-                    var newUser            = new db.User();
-
-                    newUser.facebook.id    = profile.id;
-                    newUser.facebook.token = token;
-                    newUser.email = (profile.emails[0].value || '').toLowerCase();
-
-                    newUser.save(function(err) {
-                        if (err)
-                            return done(err);
-                            
-                        return done(null, newUser);
-                    });
-                }
-            });
-
-        } else {
-            // user already exists and is logged in, we have to link accounts
-            var user            = req.user; // pull the user out of the session
-
-            user.facebook.id    = profile.id;
-            user.facebook.token = token;
-            user.email = (profile.emails[0].value || '').toLowerCase();
-
-            user.save(function(err) {
-                if (err)
-                    return done(err);
-                    
-                return done(null, user);
-            });
-
-        }
-    });
-
-}));
 
 
 // set view engine to ejs
@@ -109,30 +35,47 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 
 //  ***** All routes will go here. *****
-
-app.use('/menu', authMW.isValidated, require('./routes/menu'));
-app.use('/user', authMW.isValidated, require('./routes/user'));
+app.use('/menu', require('./routes/menu'));
+app.use('/user', require('./routes/user'));
 app.use('/auth', require('./routes/auth'));
-app.use('/contacts', authMW.isValidated, require('./routes/contacts'))
+app.use('/contacts', require('./routes/contacts'))
+app.use('/viewprofile', require('./routes/viewprofile'));
 
 // create route for '/' and render the 'index.ejs' file to the browser
 app.get('/', (req, res, next) => {
   res.render('index')
 });
 
+// Database
+var driver = neo4j.driver('bolt://localhost', neo4j.auth.basic("neo4j", 'kunju123'));
+var neo4jsession = driver.session();
 // ***** File Uploads *****
 
 var jqupload = require('jquery-file-upload-middleware');
 
+
 app.use('/upload', function(req, res, next){
-    jqupload.fileHandler({
+    var getCurrentUser = function (session) {
+      return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+      {
+        userId: req.session.userId,
+      })
+        .then(results => {
+          return results.records[0].get(0);
+        })
+    };
+    var currentUser = getCurrentUser(neo4jsession);
+    currentUser.then(function(result) {
+      console.log(result.properties.username);
+      jqupload.fileHandler({
         uploadDir: function(){
-            return __dirname + '/public/uploads/' + req.user.username;
+            return __dirname + '/public/uploads/' + result.properties.username;
         },
         uploadUrl: function(){
-            return '/uploads/' + req.user.username;
+            return '/uploads/' + result.properties.username;
         },
     })(req, res, next);
+    })
 });
 
 // 404 Error Generator

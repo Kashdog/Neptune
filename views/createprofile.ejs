@@ -174,7 +174,7 @@
                       console.log(file['name']);
                       document.getElementById('profilepichidden').value = file['name'];
                       console.log(document.getElementById('profilepichidden').value);
-                      $("#profilepicimg").attr("src","uploads/<%= user.username %>/"+file['name']);
+                      $("#profilepicimg").attr("src","uploads/<%= username %>/"+file['name']);
                     });
                 }
             });
@@ -191,7 +191,6 @@
 
         });
     </script>
-
 
 
 </body>
