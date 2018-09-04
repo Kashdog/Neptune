@@ -152,7 +152,7 @@ exports.recommendations = async (req, res, next) => {
                 })
             };
             var getRecommendations = function (session, sender) {
-                return session.run("MATCH (connection:User) -[r:connectedTo]->(:User) -[:connectedTo]->(n { username: {senderUserName} }) WHERE NOT((connection)-[:connectedTo]->(n)) AND connection.username <> {senderUserName} RETURN connection",
+                return session.run("MATCH (connection:User) -[r:connectedTo*2]-> (n { username: {senderUserName} }) WHERE NOT((connection)-[:connectedTo]->(n)) AND connection.username <> {senderUserName} RETURN connection",
                 {
                 senderUserName: sender
                 })
