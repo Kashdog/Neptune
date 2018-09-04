@@ -16,7 +16,7 @@ exports.index = async (req, res, next) => {
             res.redirect("/auth/login");
         } else{
             var getOtherUsers = function (session) {
-                return session.run("MATCH (n:User) WHERE n.id<>{userId} RETURN n",
+                return session.run("MATCH (a:User), (b:User {id: {userId}}) WHERE NOT (a)-[:connectedTo]->(b:User {id: {userId}}) AND a.id  <> {userId} AND NOT (b)-[:invites]->(a) RETURN a",
                 {
                   userId: req.session.userId,
                 })
@@ -218,7 +218,7 @@ exports.acceptinvite = async (req, res, next) => {
             var connection = acceptConnection(session, req.body.username, result.properties.username);
             connection.then(function(result) {
                 console.log(result);
-                //res.redirect("/contacts")
+                res.redirect("/contacts")
             });
          });
     } catch(err) {

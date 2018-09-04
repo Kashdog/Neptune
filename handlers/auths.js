@@ -28,11 +28,11 @@ exports.signup = async (req, res, next) => {
 exports.create = async(req, res, next) => {
   try{
     var register = function (session, username, password, phone, email) {
-    return session.run('MATCH (user:User {username: {username}}) RETURN user', {username: username})
+    return session.run('MATCH (user:User {username: {username}, {password: {password}}}) RETURN user', {username: username, password: password})
       .then(results => {
         if (!_.isEmpty(results.records)) {
           res.render('signup', {
-            message: 'User already exists',
+            message: 'User already exists or Incorrect Username or Password',
             email,
             username,
             linkedIn: "",
@@ -151,13 +151,53 @@ var options = {
     }
 };
 
+var email;
+var name;
+
 request(options, function (error, response, body) {
     if (error) throw new Error(error);
 
     console.log(body);
-    console.log(body["name"]);
-    console.log(body["email"]);
+    email = JSON.parse(body)['email'];
+    name = JSON.parse(body)['name'];
+    console.log(JSON.parse(body)['name']);
 });
+
+var register = function (session, name, email) {
+  return session.run('MATCH (user:User {email: {email}}) RETURN user', {email: email})
+    .then(results => {
+      if (!_.isEmpty(results.records)) {
+        console.log("hello");
+        return "User already exists";
+      }
+      else {
+        return session.run('CREATE (user:User {id: {id}, name: {name},email: {email}, api_key: {api_key}}) RETURN user',
+          {
+            id: uuid.v4(),
+            name: name,
+            email: email,
+            api_key: randomstring.generate({
+              length: 20,
+              charset: 'hex'
+            })
+          }
+        ).then(results => {
+            
+            return results.records[0].get('user');
+          }
+        )
+      }
+    })
+};
+var signup = register(session, name, email);
+signup.then(function(result) {
+    console.log("this is the result", result);
+    if(result == "User already exists"){
+      res.redirect("/auth/user");
+    }
+    req.session.userId = result.properties.id;
+});
+res.redirect("/user/edit");
 
   } catch(err) {
     return next(err);

@@ -63,14 +63,14 @@ a, button, input[type="submit"] {
 #settings {
   opacity: 0;
   -webkit-transform-origin: center top;
-          transform-origin: center top;
+  transform-origin: center top;
   will-change: opacity, transform;
   -webkit-animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
-          animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
+  animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
   position: relative;
   display: flex;
   flex-flow: row wrap;
-  background: white;
+  /* background: white; */
   box-shadow: 0 0 20px rgba(21, 21, 29, 0.2);
   overflow: hidden;
   color: #3f4159;
@@ -147,8 +147,11 @@ input.nav:nth-of-type(1) {
   left: 0%;
 }
 input.nav:nth-of-type(1):checked ~ main section:nth-of-type(1) {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
   -webkit-transform: translateY(0) translateZ(0);
-          transform: translateY(0) translateZ(0);
+  transform: translateY(0) translateZ(0);
   opacity: 1;
   z-index: 10;
 }

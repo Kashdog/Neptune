@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Dastan</title>
+  <title>Shuffle</title>
   <script src="https://use.typekit.net/lkh0ago.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -15,6 +15,7 @@
     <style>
     
         .hwt-content {
+            color: white;
             width: 200px;
             height: 100px;
             padding: 20px;
@@ -61,7 +62,6 @@
             <fieldset class='material'>
               <label>Profile Picture</label>
             </fieldset>
-            <img id="profilepicimg" style="width: 360px; height: 60px;" alt="" class="poster">
             <div class="file_input_div">
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
@@ -73,7 +73,6 @@
             <fieldset class='material'>
               <label>Resume</label>
             </fieldset>
-            <img id="resumeimg" height="60px" width="60px" style="width: 360px;">
             <div class="file_input_div">
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
@@ -92,6 +91,15 @@
               </div>
             </fieldset>
           </li>
+          <li>
+              <fieldset class='material'>
+                <div>
+                  <input type='text' name="username">
+                  <label>Username</label>
+                  <hr>
+                </div>
+              </fieldset>
+            </li>
           <li>
             <fieldset class='material'>
               <div>

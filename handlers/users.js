@@ -57,9 +57,10 @@ exports.edit =  async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     var register = function (session) {
-      return session.run("MATCH (n:User) WHERE n.id =~ {id} SET n.name = {name} SET n.profilepic = {profilepic} SET n.location = {location} SET n.title = {title} SET n.phonenumber = {phonenumber} SET n.bio = {bio} SET n.linkedin = {linkedin} SET n.github = {github} SET n.resume = {resume} RETURN n",
+      return session.run("MATCH (n:User) WHERE n.id =~ {id} SET n.name = {name} SET n.username = {username} SET n.profilepic = {profilepic} SET n.location = {location} SET n.title = {title} SET n.phonenumber = {phonenumber} SET n.bio = {bio} SET n.linkedin = {linkedin} SET n.github = {github} SET n.resume = {resume} RETURN n",
       {
         id: req.session.userId,
+        username: req.body.username,
         name: req.body.name,
         profilepic: req.body.profilepic,
         location: req.body.location,

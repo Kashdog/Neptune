@@ -44,7 +44,7 @@ const neo4j = require('neo4j-driver').v1;
               res.render("/contacts/")
             } else{
               user = result[0].get(0);
-              res.render("profile", {name: user.properties.name, title: user.properties.title, phonenumber: user.properties.phone, email: user.properties.email, location: user.properties.location, username: user.properties.username, bio: user.properties.bio, profilepic: user.properties.profilepic, resume: user.properties.resume});
+              res.render("profile", {name: user.properties.name, title: user.properties.title, phonenumber: user.properties.phonenumber, email: user.properties.email, location: user.properties.location, username: user.properties.username, bio: user.properties.bio, profilepic: user.properties.profilepic, resume: user.properties.resume});
             }
          });
         } catch(err) {

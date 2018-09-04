@@ -108,6 +108,9 @@ header .search svg {
 Movies
 --------------------*/
 .movies {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
   display: flex;
   padding: 8px 18px;
 }

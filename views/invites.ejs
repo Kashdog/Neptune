@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Dastan</title>
+  <title>Shuffle</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400'>
-
+  <link rel="stylesheet" href="../css/all.css">
   <link rel="stylesheet" href="../css/contactlist.css">
   <link rel="icon" href="../ruby.png" type="image/x-icon">
   <style>
@@ -58,11 +58,15 @@
 </head>
 
 <body>
-
+<fieldset class='material-button logout'>
+  <div>
+    <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
+  </div>
+</fieldset>
 <div class="app">
   <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
   <header>
-    <h1><strong>Dastan</strong></h1>
+    <h1><strong>Shuffle</strong></h1>
     <nav></nav>
     <div class="search"><input class="searchinput" type="text" required="required"/><svg><use xlink:href="#ico-search"></use></svg></div>
   </header>
@@ -74,7 +78,7 @@
   </form>
   <section class="movies">
       <% users.forEach(function (user) { %>
-          <form id="connect" class="movie" method="POST" action="/contacts/acceptinvite">
+          <form id="<%= user.name %>" class="movie" method="POST" action="/contacts/acceptinvite">
             <input type="hidden" name="username" value="<%= user.username %>">
             <img src="../uploads/<%= user.username %>/<%= user.profilepic %>" width="150px" height="200px" alt="" class="poster" />
             <div class="title"><%= user.name %></div>
@@ -84,9 +88,6 @@
               <span class="year"><%= user.location %></span>
             </div>
             <div class="desc"><%= user.bio %></div>
-            <button type="submit" value="Submit" class="play">
-              Accept Invite
-              </button>
           </form>                             
     <% }) %>
   </section>
@@ -95,11 +96,9 @@
       <use xlink:href="#close"></use>
     </svg>
     <form id="connect" class="movie" method="POST" action="/contacts/acceptinvite">
-
-      
-
-
-
+      <button type="submit" value="Submit" class="play">
+          Accept Invite
+      </button>
     </form>
   </div>
 </div>
@@ -127,6 +126,31 @@
   <script>
     $('input[type=radio]').on('change', function() {
         $(this).closest("form").submit();
+    });
+    jQuery.fn.capitalize = function() {
+      $(this[0]).keyup(function(event) {
+          var box = event.target;
+          var txt = $(this).val();
+          var stringStart = box.selectionStart;
+          var stringEnd = box.selectionEnd;
+          $(this).val(txt.replace(/^(.)|(\s|\-)(.)/g, function($word) {
+              return $word.toUpperCase();
+          }));
+          box.setSelectionRange(stringStart , stringEnd);
+      });
+
+      return this;
+    }
+    $('.searchinput').capitalize();
+    $('.searchinput').keyup(function() {
+      console.log($(this).val()); // get the current value of the input field.
+      if($(this).val() == ""){
+        $('.movie').show();
+      } else{
+        filter = $(this).val(); 
+        $('[id^=' + $(this).val() + ']').show();
+        $(".movie:not([id^=" + $(this).val() +  "])").hide();
+      }
     });
   </script>
 
