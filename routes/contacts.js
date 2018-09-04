@@ -17,10 +17,17 @@ router.route("/invites/")
 router.route("/connections/")
   .get(handler.connections)
 
+// Route to see your recommendations
 
+router.route("/recommendations/")
+  .get(handler.recommendations)
+
+// Route to Connect with others
 
 router.route("/connect/")
   .post(handler.connect)
+
+// Route to Accept Invites
 
 router.route("/acceptinvite/")
   .post(handler.acceptinvite)

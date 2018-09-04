@@ -135,6 +135,53 @@ exports.connections = async (req, res, next) => {
     
 }
 
+exports.recommendations = async (req, res, next) => {
+    try {
+        if(!req.session.userId || req.session.userId == ""){
+            console.log("true");
+            res.redirect("/auth/login");
+        } else{
+            console.log("this is the recommendations page");
+            var getCurrentUser = function (session) {
+                return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+                {
+                    userId: req.session.userId,
+                })
+                .then(results => {
+                return results.records[0].get(0);
+                })
+            };
+            var getRecommendations = function (session, sender) {
+                return session.run("MATCH (connection:User) -[r:connectedTo]->(:User) -[:connectedTo]->(n { username: {senderUserName} }) WHERE NOT((connection)-[:connectedTo]->(n)) AND connection.username <> {senderUserName} RETURN connection",
+                {
+                senderUserName: sender
+                })
+                .then(results => {
+                    return results.records;
+                })
+            };
+            var currentUser = getCurrentUser(session);
+            var allRecommendations = [];
+            currentUser.then(function(result) {
+                console.log("Current User", result.properties.username);
+                var recommendations = getRecommendations(session, result.properties.username);
+                recommendations.then(function(result) {
+                    console.log("Invites Result", result)
+                    for(var i = 0; i < result.length; i++){
+                        allRecommendations.push(result[i].get(0).properties);
+                    }
+                    console.log("These are the allConnections", allRecommendations);
+                    console.log("number of allConnectionss", allRecommendations.length);
+                    res.render('recommendedfriends.ejs', { "users": allRecommendations });
+                });
+            });  
+        }
+    } catch(err) {
+      return next(err);
+    }
+    
+}
+
 exports.changeView = async (req, res, next) => {
     try{
         console.log("view", req.body.all);
@@ -147,6 +194,9 @@ exports.changeView = async (req, res, next) => {
         else if (req.body.all == "invites"){
             res.redirect("/contacts/invites");
 
+        }
+        else if(req.body.all == "recommendedfriends"){
+            res.redirect("/contacts/recommendations");
         }
     } catch(err) {
         return next(err);

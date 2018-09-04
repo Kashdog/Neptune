@@ -63,6 +63,7 @@
     <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
   </div>
 </fieldset>
+
 <div class="app">
   <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
   <header>
@@ -72,14 +73,14 @@
   </header>
   <h2>Connect With</h2>
   <form action="/contacts/changeview" method="POST" class="radio">
-    <input class="radio" type="radio" name="all" value="all" > All 
+    <input class="radio" type="radio" name="all" value="all"> All 
     <input class="radio" type="radio" name="all" value="incontacts"> In Contacts
-    <input class="radio" type="radio" name="all" value="invites" checked> Invites
-    <input class="radio" type="radio" name="all" value="recommendedfriends"> Recommendations
+    <input class="radio" type="radio" name="all" value="invites"> Invites
+    <input class="radio" type="radio" name="all" value="recommendedfriends" checked> Recommendations
   </form>
   <section class="movies">
       <% users.forEach(function (user) { %>
-          <form id="<%= user.name %>" class="movie" method="POST" action="/contacts/acceptinvite">
+          <form id="<%= user.name %>" class="movie" method="POST" action="/contacts/connect">
             <input type="hidden" name="username" value="<%= user.username %>">
             <img src="../uploads/<%= user.username %>/<%= user.profilepic %>" width="150px" height="200px" alt="" class="poster" />
             <div class="title"><%= user.name %></div>
@@ -89,6 +90,7 @@
               <span class="year"><%= user.location %></span>
             </div>
             <div class="desc"><%= user.bio %></div>
+            
           </form>                             
     <% }) %>
   </section>
@@ -96,10 +98,11 @@
     <svg class="close">
       <use xlink:href="#close"></use>
     </svg>
-    <form id="connect" class="movie" method="POST" action="/contacts/acceptinvite">
+
+    <form id="connect" class="movie" method="POST" action="/contacts/connect">
       <button type="submit" value="Submit" class="play">
-          Accept Invite
-      </button>
+              Connect
+              </button>
     </form>
   </div>
 </div>
