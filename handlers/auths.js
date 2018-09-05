@@ -28,7 +28,7 @@ exports.signup = async (req, res, next) => {
 exports.create = async(req, res, next) => {
   try{
     var register = function (session, username, password, phone, email) {
-    return session.run('MATCH (user:User {username: {username}, {password: {password}}}) RETURN user', {username: username, password: password})
+    return session.run('MATCH (user:User {username: {username}, password: {password}}) RETURN user', {username: username, password: password})
       .then(results => {
         if (!_.isEmpty(results.records)) {
           res.render('signup', {

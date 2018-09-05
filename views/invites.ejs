@@ -142,6 +142,8 @@
 
       return this;
     }
+    
+    console.log($('#Feanor\\ Curufinwe'));
     $('.searchinput').capitalize();
     $('.searchinput').keyup(function() {
       console.log($(this).val()); // get the current value of the input field.
@@ -149,8 +151,8 @@
         $('.movie').show();
       } else{
         filter = $(this).val(); 
-        $('[id^=' + $(this).val() + ']').show();
-        $(".movie:not([id^=" + $(this).val() +  "])").hide();
+        $('[id^=' + $(this).val().replace(" ", "\\ ") + ']').show();
+        $(".movie:not([id^=" + $(this).val().replace(" ", "\\ ") +  "])").hide();
       }
     });
   </script>
