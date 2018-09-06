@@ -76,11 +76,16 @@ a, button, input[type="submit"] {
   color: #3f4159;
   border-radius: 2px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 600px;
   height: 100%;
+  max-height: 500px;
 }
-@media only screen and (min-width: 500px) {
+
+@media only screen and (max-device-width: 480px) {
   #settings {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
     max-height: 600px;
   }
 }

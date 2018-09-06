@@ -26,13 +26,19 @@ App
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%) scale(1.5,1.5);
+  transform: translate(-50%, -50%);
   width: 640px;
   height: 390px;
   /* background: transparent; */
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-device-width: 480px) {
+  .app {
+    transform: translate(-50%, -50%) scale(1.5,1.5);
+  }
 }
 .app h2 {
   color: #fff;
