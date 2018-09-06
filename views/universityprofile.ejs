@@ -1,0 +1,61 @@
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shuffle</title>
+  <script src="https://use.typekit.net/lkh0ago.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="icon" href="../ruby.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/all.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .menuicon{
+      padding: 0px;
+      position: absolute;
+      top: 0%;
+      left: 47.5%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <fieldset class='material-button logout'>
+    <div>
+      <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
+    </div>
+  </fieldset>
+  <a href="/menu"><img class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
+
+  <main class='profile' ontouchstart>
+  <div class='background'></div>
+  <aside class='avatar' style="background: url('../uploads/<%= moderatorusername %>/<%= logo %>') no-repeat top center/cover;"></aside>
+  <section class='info'>
+    <h1><%= name %></h1>
+    <h2><%= location %></h2>
+    <a class='follow'><%= website %></a>
+    <ul>
+      <li>
+        <a class='link github' href='mailto:<%= email %>' target='_blank'>
+          <div class="email-icon"><i class="material-icons" style="color: white;">email</i></div>
+        </a>
+      </li>
+    </ul>
+    <img style="background-color: white;" src="../qr.png" width="150px" height="150px">
+  </section>
+</main>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+  
+
+    <script  src="../js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

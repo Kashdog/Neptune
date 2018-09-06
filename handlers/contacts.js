@@ -286,7 +286,7 @@ exports.editUniversity =  async (req, res, next) => {
                 })
             };
         var joinUniversity = function (session, sender, university) {
-            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'university', name: {university}}) CREATE (a)-[r:studiedAt]->(b) RETURN type(r)",
+            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'university', name: {university}}) WHERE NOT ((a)-[:studiedAt]->(b)) CREATE (a)-[r:studiedAt]->(b) CREATE (a)-[:isAMemberOf]->(b) RETURN type(r)",
             {
             senderUserName: sender,
             university: university
