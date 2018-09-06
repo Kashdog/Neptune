@@ -72,11 +72,18 @@
     <div class="search"><input class="searchinput" type="text" required="required"/><svg><use xlink:href="#ico-search"></use></svg></div>
   </header>
   <h2>Connect With</h2>
-  <form action="/contacts/changeview" method="POST" class="radio">
+  <form style="display: inline;" action="/contacts/changeview" method="POST" class="radio">
     <input class="radio" type="radio" name="all" value="all" checked> All 
     <input class="radio" type="radio" name="all" value="incontacts"> In Contacts
     <input class="radio" type="radio" name="all" value="invites"> Invites
     <input class="radio" type="radio" name="all" value="recommendedfriends"> Recommendations
+  </form>
+  <form style="display: inline;" action="/contacts/changegroup/" method="POST">
+    <select name="group">
+      <option value="individual">Indidivuals</option>
+      <option value="university">University</option>
+      <option value="company">Company</option>
+    </select>
   </form>
   <section class="movies">
       <% users.forEach(function (user) { %>
@@ -129,6 +136,9 @@
     <script  src="js/contactlist.js"></script>
   <script>
     $('input[type=radio]').on('change', function() {
+        $(this).closest("form").submit();
+    });
+    $('select').on('change', function() {
         $(this).closest("form").submit();
     });
     jQuery.fn.capitalize = function() {

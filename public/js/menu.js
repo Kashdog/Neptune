@@ -130,12 +130,12 @@ function redirect(o) {
     window.location.href = "../settings/index.html";
   }
   if (id == "#photo") {
-    window.location.href = "../settings/createprofile.html";
+    window.location.href = "../user/edit";
   }
   if (id == "#portfolio") {
     window.location.href = "../contacts";
   }
 }
  document.getElementById("cloud").onclick = function(){
-    window.location.href = "../profile/index.html";
+    window.location.href = "../user";
  }

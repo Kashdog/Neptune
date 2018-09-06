@@ -68,6 +68,9 @@ $('body').click(function(e){
   else if ($p.is('.detail')){
     return true;
   }
+  else if ($p.is('h1')){
+    return true;
+  }
   else if ($p.is('.app')){
     return false;
   } else {

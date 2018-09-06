@@ -203,6 +203,130 @@ exports.changeView = async (req, res, next) => {
     }
 }
 
+exports.universities = async (req, res, next) => {
+    try {
+        if(!req.session.userId || req.session.userId == ""){
+            console.log("true");
+            res.redirect("/auth/login");
+        } else{
+            console.log("this is the universities page");
+            var getUniversities = function (session) {
+                return session.run("MATCH (u:Group {type: 'university'})return u")
+                .then(results => {
+                    return results.records;
+                })
+            };
+            var allUniversities = [];
+            var universities = getUniversities(session);
+            universities.then(function(result) {
+                console.log("University Result", result)
+                for(var i = 0; i < result.length; i++){
+                    allUniversities.push(result[i].get(0).properties);
+                }
+                console.log("These are the universities", allUniversities);
+                console.log("number of universities", allUniversities.length);
+                res.render('university.ejs', { "users": allUniversities });
+            }); 
+        }
+    } catch(err) {
+      return next(err);
+    }
+    
+}
+
+exports.editUniversity =  async (req, res, next) => {
+    var getCurrentUser = function (session) {
+      return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+      {
+        userId: req.session.userId,
+      })
+        .then(results => {
+          return results.records[0].get(0);
+        })
+    };
+    var currentUser = getCurrentUser(session);
+    await currentUser.then(function(result) {
+      console.log(result.properties.username);
+      res.render("createUniversity", {username: result.properties.username});
+   })
+  }
+
+  exports.updateUniversity = async (req, res, next) => {
+    try {
+      var register = function (session) {
+        return session.run("CREATE (u:Group {type: 'university', moderatorid: {id}, name: {name}, logo: {logo}, location: {location}, moderatorusername: {username}, website: {website}})",
+        {
+          id: req.session.userId,
+          name: req.body.name,
+          logo: req.body.universitylogo,
+          location: req.body.location,
+          username : req.body.username,
+          website: req.body.website
+        })
+          .then(results => {
+            console.log(results.records);
+          })
+      };
+      register(session);
+      res.redirect('/contacts/groups/universities')
+    } catch(err) {
+      return next(err);
+    }
+  }
+
+  exports.joinUniversity = async(req, res, next) => {
+    try {
+        var getCurrentUser = function (session) {
+            return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+            {
+                userId: req.session.userId,
+            })
+                .then(results => {
+                return results.records[0].get(0);
+                })
+            };
+        var joinUniversity = function (session, sender, university) {
+            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'university', name: {university}}) CREATE (a)-[r:studiedAt]->(b) RETURN type(r)",
+            {
+            senderUserName: sender,
+            university: university
+            })
+            .then(results => {
+                return results.records[0].get(0);
+            })
+        };
+          var currentUser = getCurrentUser(session);
+          currentUser.then(function(result) {
+            console.log("join a university");
+            console.log(result.properties.username);
+            console.log(result.properties.username, req.params.name);
+            var join = joinUniversity(session, result.properties.username, req.params.name);
+            join.then(function(result) {
+                console.log(result);
+                res.redirect("/contacts/groups/universities")
+            });
+         });
+      } catch(err) {
+        return next(err);
+      }  
+  }
+
+
+
+exports.changeGroup = async (req, res, next) => {
+    try{
+        console.log(req.body);
+        if(req.body.group == "university"){
+            res.redirect("/contacts/groups/universities")
+        } 
+        else{
+            res.redirect("/contacts");
+        }
+    } catch(err) {
+        return next(err);
+    }
+}
+
 exports.connect = async (req, res, next) => {
     try {
         var getCurrentUser = function (session) {

@@ -38,20 +38,25 @@ exports.index = (req, res, next) => {
 }
 
 exports.edit =  async (req, res, next) => {
-  var getCurrentUser = function (session) {
-    return session.run("MATCH (n:User{id: {userId}}) RETURN n",
-    {
-      userId: req.session.userId,
-    })
-      .then(results => {
-        return results.records[0].get(0);
+  if(!req.session.userId || req.session.userId == ""){
+    console.log("true");
+    res.redirect("/auth/login");
+  } else{
+    var getCurrentUser = function (session) {
+      return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+      {
+        userId: req.session.userId,
       })
-  };
-  var currentUser = getCurrentUser(session);
-  await currentUser.then(function(result) {
-    console.log(result.properties.username);
-    res.render("createprofile", {username: result.properties.username});
- })
+        .then(results => {
+          return results.records[0].get(0);
+        })
+    };
+    var currentUser = getCurrentUser(session);
+    await currentUser.then(function(result) {
+      console.log(result.properties.username);
+      res.render("createprofile", {username: result.properties.username});
+  })
+}
 }
 
 exports.update = async (req, res, next) => {

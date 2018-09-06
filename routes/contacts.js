@@ -5,8 +5,14 @@ const express  = require("express"),
 router.route("/")
   .get(handler.index)
 
+// Change html based on radio button for different types of users
 router.route("/changeview")
   .post(handler.changeView)
+
+// Show different groups 
+
+router.route("/changegroup")
+  .post(handler.changeGroup)
 
 // Route to see people who have invite you
 router.route("/invites/")
@@ -21,6 +27,21 @@ router.route("/connections/")
 
 router.route("/recommendations/")
   .get(handler.recommendations)
+
+// Route to see University Groups
+
+router.route("/groups/universities")
+  .get(handler.universities)
+
+// Route to edit or create University Groups
+router.route("/groups/universities/edit")
+  .get(handler.editUniversity)
+  .post(handler.updateUniversity)
+
+// Route to join a University Group
+
+router.route("/groups/universities/:name/join")
+  .post(handler.joinUniversity)
 
 // Route to Connect with others
 
