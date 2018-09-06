@@ -64,25 +64,24 @@ a, button, input[type="submit"] {
   opacity: 0;
   -webkit-transform-origin: center top;
   transform-origin: center top;
+  transform: scale(1.5,1.5);
   will-change: opacity, transform;
   -webkit-animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
   animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
   position: relative;
   display: flex;
   flex-flow: row wrap;
-  /* background: white; */
   box-shadow: 0 0 20px rgba(21, 21, 29, 0.2);
   overflow: hidden;
   color: #3f4159;
   border-radius: 2px;
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
   height: 100%;
-  transform: scale(1.5,1.5);
 }
 @media only screen and (min-width: 500px) {
   #settings {
-    max-height: 525px;
+    max-height: 600px;
   }
 }
 
