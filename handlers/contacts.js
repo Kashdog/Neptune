@@ -6,7 +6,7 @@ const neo4j = require('neo4j-driver').v1;
       var _ = require('lodash');
       var crypto = require('crypto');
 
-      var driver = neo4j.driver('bolt://localhost', neo4j.auth.basic("neo4j", 'kunju123'));
+      var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
       var session = driver.session();
 
 exports.index = async (req, res, next) => {

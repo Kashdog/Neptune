@@ -6,7 +6,7 @@ const neo4j = require('neo4j-driver').v1;
       var _ = require('lodash');
       var crypto = require('crypto');
 
-      var driver = neo4j.driver('bolt://localhost', neo4j.auth.basic("neo4j", 'kunju123'));
+      var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
       var session = driver.session();
       
 exports.index = (req, res, next) => {
@@ -54,13 +54,15 @@ exports.edit =  async (req, res, next) => {
     var currentUser = getCurrentUser(session);
     await currentUser.then(function(result) {
       console.log(result.properties.username);
-      res.render("createprofile", {username: result.properties.username});
+      res.render("createprofile", {username: result.properties.username, message: ""});
   })
 }
 }
 
 exports.update = async (req, res, next) => {
   try {
+    console.log(req.files);     
+                                
     var register = function (session) {
       return session.run("MATCH (n:User) WHERE n.id =~ {id} SET n.name = {name} SET n.username = {username} SET n.profilepic = {profilepic} SET n.location = {location} SET n.title = {title} SET n.phonenumber = {phonenumber} SET n.bio = {bio} SET n.linkedin = {linkedin} SET n.github = {github} SET n.resume = {resume} RETURN n",
       {
@@ -82,24 +84,6 @@ exports.update = async (req, res, next) => {
     };
     register(session);
     res.redirect('/user/')
-    /*console.log(req.user);
-    const userinfo = {
-      name: req.body.name,
-      profilepic: req.body.profilepic,
-      location: req.body.location,
-      title: req.body.title,
-      bio: req.body.bio,
-      phone: req.body.phonenumber,
-      linkedin: req.body.linkedin,
-      github: req.body.github,
-      resume: req.body.resume
-    };
-    db.User.updateOne({_id: req.user._id}, userinfo, function(err, raw) {
-      if (err) {
-        res.send(err);
-      }
-      res.redirect('/user/')
-    });*/
   } catch(err) {
     return next(err);
   }

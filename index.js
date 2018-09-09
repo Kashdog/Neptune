@@ -50,36 +50,9 @@ app.get('/', (req, res, next) => {
 });
 
 // Database
-var driver = neo4j.driver('bolt://localhost', neo4j.auth.basic("neo4j", 'kunju123'));
+var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
 var neo4jsession = driver.session();
-// ***** File Uploads *****
 
-var jqupload = require('jquery-file-upload-middleware');
-
-
-app.use('/upload', function(req, res, next){
-    var getCurrentUser = function (session) {
-      return session.run("MATCH (n:User{id: {userId}}) RETURN n",
-      {
-        userId: req.session.userId,
-      })
-        .then(results => {
-          return results.records[0].get(0);
-        })
-    };
-    var currentUser = getCurrentUser(neo4jsession);
-    currentUser.then(function(result) {
-      console.log(result.properties.username);
-      jqupload.fileHandler({
-        uploadDir: function(){
-            return __dirname + '/public/uploads/' + result.properties.username;
-        },
-        uploadUrl: function(){
-            return '/uploads/' + result.properties.username;
-        },
-    })(req, res, next);
-    })
-});
 
 // 404 Error Generator
 app.use((req, res, next) => {

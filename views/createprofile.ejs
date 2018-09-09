@@ -54,9 +54,7 @@
   <span class='nav'>Create a Card</span>
   <main class='content'>
     <section id='profile'>
-      <form action="/user/edit" method="POST">
-        <input id="profilepichidden" type="hidden" name="profilepic" value="">
-        <input id="resumehidden" type="hidden" name="resume" value="">
+      <form action="/user/edit" enctype="multipart/form-data" method="POST">
         <ul>
           <li class='large padding avatar'>
             <fieldset class='material'>
@@ -66,7 +64,7 @@
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
                   <i class="material-icons">file_upload</i>
-                  <input id="profilepicinput" accept="image/*" class="none" type="file" data-url="/upload"/>
+                  <input id="profilepicinput" name="profilepic" accept="image/*" class="none" type="file" data-url="/upload"/>
                 </label>
               </div>
             </div>
@@ -77,7 +75,7 @@
               <div class="file_input">
                 <label class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
                   <i class="material-icons">file_upload</i>
-                  <input id="resumeinput" class="none" type="file" data-url="/upload"//>
+                  <input id="resumeinput" class="none" name="resume" type="file" data-url="/upload"//>
                 </label>
               </div>
             </div>
@@ -92,15 +90,6 @@
             </fieldset>
           </li>
           <li>
-              <fieldset class='material'>
-                <div>
-                  <input type='text' name="username">
-                  <label>Username</label>
-                  <hr>
-                </div>
-              </fieldset>
-            </li>
-          <li>
             <fieldset class='material'>
               <div>
                 <input required type='text' name="location">
@@ -114,15 +103,6 @@
               <div>
                 <input required type='text' name="title">
                 <label>Title</label>
-                <hr>
-              </div>
-            </fieldset>
-          </li>
-          <li>
-            <fieldset class='material'>
-              <div>
-                <input required type='number' name="phonenumber">
-                <label>Phone number</label>
                 <hr>
               </div>
             </fieldset>
@@ -145,23 +125,18 @@
               </div>
             </fieldset>
           </li>
-          <li class='large padding'>
-            <fieldset class='material-button center'>
-              <p class="error"><%=message%></p>
-              <div>
-                <input class='save' type='submit' value='Save'>
-              </div>            
-            </fieldset>
-          </li>
           <li>
                 <textarea required name="bio" spellcheck="false" class="hwt-input hwt-content">Type in your biography
                 </textarea>
           </li>   
           <li class='large padding'>
             <fieldset class='material-button center'>
+              <% if (message) { %>
+                <p class="error"><%=message%></p>
+              <% } %>
               <div>
-                <input id="save" class='save' type='submit' value='Save'>
-              </div>
+                <input class='save' type='submit' value='Save'>
+              </div>            
             </fieldset>
           </li>
         </ul>
@@ -180,33 +155,6 @@
   <script src="../js/jquery.ui.widget.js"></script>
   <script src="../js/jquery.iframe-transport.js"></script>
   <script src="../js/jquery.fileupload.js"></script>
-  <script>
-        $(document).ready(function(){
-
-            $('#profilepicinput').fileupload({
-                dataType: 'json',
-                done: function(e, data){
-                    $.each(data.result.files, function(index, file){
-                      console.log(file['name']);
-                      document.getElementById('profilepichidden').value = file['name'];
-                      console.log(document.getElementById('profilepichidden').value);
-                      $("#profilepicimg").attr("src","uploads/<%= username %>/"+file['name']);
-                    });
-                }
-            });
-            $('#resumeinput').fileupload({
-                dataType: 'json',
-                done: function(e, data){
-                    $.each(data.result.files, function(index, file){
-                      console.log(file['name']);
-                      document.getElementById('resumehidden').value = file['name'];
-                      console.log(document.getElementById('resumehidden').value);
-                    });
-                }
-            });
-
-        });
-    </script>
 
 
 </body>

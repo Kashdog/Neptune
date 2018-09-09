@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Jonny15t/janus_api#readme",
   "dependencies": {
+    "@google-cloud/storage": "^2.0.0",
     "blueimp-file-upload-node": "^2.1.0",
     "body-parser": "^1.18.3",
     "connect-busboy": "0.0.2",
