@@ -33,6 +33,7 @@ exports.index = async (req, res, next) => {
                 console.log("all other Users voldy", allOtherUsers);
                 res.render('contactlist.ejs', { "users": allOtherUsers });
              })
+
              
         }
     } catch(err) {
@@ -235,40 +236,64 @@ exports.universities = async (req, res, next) => {
 }
 
 exports.editUniversity =  async (req, res, next) => {
-    var getCurrentUser = function (session) {
-      return session.run("MATCH (n:User{id: {userId}}) RETURN n",
-      {
-        userId: req.session.userId,
-      })
-        .then(results => {
-          return results.records[0].get(0);
+    if(!req.session.userId || req.session.userId == ""){
+        console.log("true");
+        res.redirect("/auth/login");
+    } else{
+        var getCurrentUser = function (session) {
+        return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+        {
+            userId: req.session.userId,
         })
-    };
-    var currentUser = getCurrentUser(session);
-    await currentUser.then(function(result) {
-      console.log(result.properties.username);
-      res.render("createUniversity", {username: result.properties.username});
-   })
+            .then(results => {
+            return results.records[0].get(0);
+            })
+        };
+        var currentUser = getCurrentUser(session);
+        await currentUser.then(function(result) {
+            console.log(result.properties.username);
+            res.render("createUniversity", {username: result.properties.username});
+        })
+    }
   }
 
   exports.updateUniversity = async (req, res, next) => {
     try {
-      var register = function (session) {
-        return session.run("CREATE (u:Group {type: 'university', moderatorid: {id}, name: {name}, logo: {logo}, location: {location}, moderatorusername: {username}, website: {website}})",
-        {
-          id: req.session.userId,
-          name: req.body.name,
-          logo: req.body.universitylogo,
-          location: req.body.location,
-          username : req.body.username,
-          website: req.body.website
-        })
+      let register = function (session, username, password, phone, email) {
+        return session.run("MATCH (u:Group {type: 'university', name: {name} }) RETURN u", {name: req.body.name})
           .then(results => {
-            console.log(results.records);
+            if (!_.isEmpty(results.records)) {
+              res.render('createUniversity', {
+                message: 'Group already exists',
+                email,
+                username,
+                linkedIn: "",
+                phone         
+              })
+            }
+            else {
+              return session.run("CREATE (u:Group {type: 'university', moderatorid: {id}, name: {name}, logo: {logo}, location: {location}, moderatorusername: {username}, website: {website}}) RETURN u",
+                {
+                    id: req.session.userId,
+                    name: req.body.name,
+                    logo: req.body.universitylogo,
+                    location: req.body.location,
+                    username : req.body.username,
+                    website: req.body.website
+                }
+              ).then(results => {
+                  
+                  return results.records[0].get(0);
+                }
+              )
+            }
           })
       };
-      register(session);
-      res.redirect('/contacts/groups/universities')
+      let createUniversity = register(session);
+      await createUniversity.then(function(result) {
+        console.log("hallaflnsaj", result);
+        res.redirect('/contacts/groups/universities')
+     })
     } catch(err) {
       return next(err);
     }
@@ -286,13 +311,13 @@ exports.editUniversity =  async (req, res, next) => {
                 })
             };
         var joinUniversity = function (session, sender, university) {
-            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'university', name: {university}}) WHERE NOT ((a)-[:studiedAt]->(b)) CREATE (a)-[r:studiedAt]->(b) CREATE (a)-[:isAMemberOf]->(b) RETURN type(r)",
+            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'university', name: {university}}) WHERE NOT ((a)-[:studiedAt]->(b)) CREATE (a)-[r:studiedAt]->(b) RETURN type(r)",
             {
             senderUserName: sender,
             university: university
             })
             .then(results => {
-                return results.records[0].get(0);
+                return results;
             })
         };
           var currentUser = getCurrentUser(session);

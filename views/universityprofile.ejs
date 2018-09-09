@@ -7,8 +7,8 @@
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel="icon" href="../ruby.png" type="image/x-icon" />
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/all.css">
+  <link rel="stylesheet" href="../../css/index.css">
+  <link rel="stylesheet" href="../../css/all.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     .menuicon{
@@ -27,23 +27,18 @@
       <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
     </div>
   </fieldset>
-  <a href="/menu"><img class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
+  <a href="/menu"><img class="menuicon" height="100px" width="100px" src="../../ruby.png" alt=""></a>
 
   <main class='profile' ontouchstart>
   <div class='background'></div>
-  <aside class='avatar' style="background: url('../uploads/<%= moderatorusername %>/<%= logo %>') no-repeat top center/cover;"></aside>
+  <aside class='avatar' style="background: url('../../uploads/<%= moderatorusername %>/<%= logo %>') no-repeat top center/cover; background-size: 300px 400px;"></aside>
   <section class='info'>
     <h1><%= name %></h1>
     <h2><%= location %></h2>
-    <a class='follow'><%= website %></a>
+    <a href='https://<%= website %>' class='follow'><%= website %></a>
     <ul>
-      <li>
-        <a class='link github' href='mailto:<%= email %>' target='_blank'>
-          <div class="email-icon"><i class="material-icons" style="color: white;">email</i></div>
-        </a>
-      </li>
     </ul>
-    <img style="background-color: white;" src="../qr.png" width="150px" height="150px">
+    <img style="background-color: white;" src="../../qr.png" width="150px" height="150px">
   </section>
 </main>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
@@ -51,7 +46,7 @@
 
   
 
-    <script  src="../js/index.js"></script>
+    <script  src="../../js/index.js"></script>
 
 
 

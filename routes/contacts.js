@@ -41,7 +41,7 @@ router.route("/groups/universities/edit")
 // Route to join a University Group
 
 router.route("/groups/universities/:name/join")
-  .post(handler.joinUniversity)
+  .get(handler.joinUniversity)
 
 // Route to Connect with others
 

@@ -65,7 +65,7 @@
 </fieldset>
 
 <div class="app">
-    <a href="/menu"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="80px" width="80px" src="../ruby.png" alt=""></a> 
+    <a href="/menu"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="80px" width="80px" src="../../ruby.png" alt=""></a> 
   <header>
     <a href="/contacts/groups/universities/edit"><h1><strong>Create</strong></h1></a>
     <nav></nav>
@@ -80,7 +80,7 @@
   </form>
   <form style="display: inline;" action="/contacts/changegroup/" method="POST">
     <select name="group">
-      <option value="individual">Indidivuals</option>
+      <option value="individual">Individuals</option>
       <option value="university" selected="selected">University</option>
       <option value="company">Company</option>
     </select>
@@ -92,8 +92,6 @@
             <img src="/uploads/<%= user.moderatorusername %>/<%= user.logo %>" width="150px" height="200px" alt="" class="poster" />
             <div class="title"><%= user.name %></div>
             <div class="info">
-              <span class="length">Website</span>
-              <br>
               <span class="year"><%= user.location %></span>
             </div>
             <div class="desc"></div>
@@ -106,10 +104,9 @@
       <use xlink:href="#close"></use>
     </svg>
 
-    <form id="connect" class="movie" method="POST" action="/contacts/connect"></form>
-      <button type="submit" value="Submit" class="play">
-              Join
-              </button>
+    <div id="connect" class="movie">
+      <button onclick="window.location = '/viewuniversity/profile/' + $('#connect').children('input').val()" class="play">View Profile</button>
+      <button onclick="window.location = '/viewuniversity/members/' + $('#connect').children('input').val()" class="play">View Members</button>
     </form>
   </div>
 </div>
@@ -135,10 +132,10 @@
 
     <script  src="../../js/contactlist.js"></script>
   <script>
-    $('.movies .movie').click(function(){
+    /*$('.movies .movie').click(function(){
     console.log($('#connect').children('input').val());
     $('#connect').attr('action', '/contacts/groups/universities/' +  $('#connect').children('input').val() + '/join');
-    });
+    });*/
     //$('#connect').val();
     $('input[type=radio]').on('change', function() {
         $(this).closest("form").submit();

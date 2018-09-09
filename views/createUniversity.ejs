@@ -38,6 +38,10 @@
               display: block;
               top: 0%;
             }
+
+            .error{
+              color: red;
+            }
           </style>
   
 </head>
@@ -108,6 +112,7 @@
           </li> 
           <li class='large padding'>
             <fieldset class='material-button center'>
+              <p class="error"><%=message%></p>
               <div>
                 <input id="save" class='save' type='submit' value='Save'>
               </div>

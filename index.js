@@ -41,6 +41,8 @@ app.use('/auth', require('./routes/auth'));
 app.use('/contacts', require('./routes/contacts'))
 app.use('/viewprofile', require('./routes/viewprofile'));
 app.use('/viewuniversity', require('./routes/viewuniversity'));
+app.use('/qrconnect', require('./routes/qrconnect'))
+app.use('/viz', require('./routes/viz'));
 
 // create route for '/' and render the 'index.ejs' file to the browser
 app.get('/', (req, res, next) => {

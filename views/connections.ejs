@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400'>
-  <link rel="stylesheet" href="../css/all.css">
-  <link rel="stylesheet" href="../css/contactlist.css">
-  <link rel="icon" href="../ruby.png" type="image/x-icon">
+  <link rel="stylesheet" href="../../css/all.css">
+  <link rel="stylesheet" href="../../css/contactlist.css">
+  <link rel="icon" href="../../ruby.png" type="image/x-icon">
   <style>
 
     .radio {
@@ -64,7 +64,7 @@
   </div>
 </fieldset>
 <div class="app">
-    <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="80px" width="80px" src="../ruby.png" alt=""></a>
+    <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu/';" class="menuicon" height="80px" width="80px" src="../ruby.png" alt=""></a>
   <header>
     <h1><strong>Shuffle</strong></h1>
     <nav></nav>
@@ -72,14 +72,14 @@
   </header>
   <h2>Connect With</h2>
   <form style="display: inline;" action="/contacts/changeview" method="POST" class="radio">
-    <input class="radio" type="radio" name="all" value="all" checked> All 
-    <input class="radio" type="radio" name="all" value="incontacts"> In Contacts
+    <input class="radio" type="radio" name="all" value="all"> All 
+    <input class="radio" type="radio" name="all" value="incontacts" checked> In Contacts
     <input class="radio" type="radio" name="all" value="invites"> Invites
     <input class="radio" type="radio" name="all" value="recommendedfriends"> Recommendations
   </form>
   <form style="display: inline;" action="/contacts/changegroup/" method="POST">
     <select name="group">
-      <option value="individual">Indidivuals</option>
+      <option value="individual">Individuals</option>
       <option value="university">University</option>
       <option value="company">Company</option>
     </select>
@@ -88,7 +88,7 @@
       <% users.forEach(function (user) { %>
           <form id="<%= user.name %>" class="movie" method="POST" action="/contacts/acceptinvite">
             <input type="hidden" name="username" value="<%= user.username %>">
-            <img src="../uploads/<%= user.username %>/<%= user.profilepic %>" width="150px" height="200px" alt="" class="poster" />
+            <img src="../../uploads/<%= user.username %>/<%= user.profilepic %>" width="150px" height="200px" alt="" class="poster" />
             <div class="title"><%= user.name %></div>
             <div class="info">
               <span class="length"><%= user.title %></span>
@@ -132,7 +132,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
   
 
-    <script  src="../js/contactlist.js"></script>
+    <script  src="../../js/contactlist.js"></script>
   <script>
     $('input[type=radio]').on('change', function() {
         $(this).closest("form").submit();
