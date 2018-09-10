@@ -8,7 +8,7 @@ const neo4j = require('neo4j-driver').v1
       var Facebook = require('facebook-node-sdk');
 
 
-      var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
+      var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
       var session = driver.session();
 
 exports.signup = async (req, res, next) => {
@@ -29,7 +29,7 @@ exports.create = async(req, res, next) => {
   try{
     console.log(req.body);
     var register = function (session, username, password, phone, email) {
-    return session.run('MATCH (user:User {username: {username}, password: {password}, email: {email} }) RETURN user', {username: username, password: password, email: req.body.email})
+    return session.run('MATCH (user:User {username: {username} }) RETURN user', {username: username})
       .then(results => {
         if (!_.isEmpty(results.records)) {
           res.render('signup', {
@@ -65,6 +65,7 @@ exports.create = async(req, res, next) => {
   var signup = register(session, req.body.username, req.body.password, req.body.phone, req.body.email);
   console.log(signup);
   await signup.then(function(result) {
+    console.log("properties.id", result.properties.id);
     req.session.userId = result.properties.id;
  })
   res.redirect("/user/edit");

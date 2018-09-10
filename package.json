@@ -23,6 +23,7 @@
     "blueimp-file-upload-node": "^2.1.0",
     "body-parser": "^1.18.3",
     "connect-busboy": "0.0.2",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "del": "^3.0.0",
     "ejs": "^2.6.1",

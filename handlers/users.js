@@ -6,7 +6,7 @@ const neo4j = require('neo4j-driver').v1;
       var _ = require('lodash');
       var crypto = require('crypto');
 
-      var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
+      var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
       var session = driver.session();
 
       
@@ -39,6 +39,7 @@ exports.index = (req, res, next) => {
 }
 
 exports.edit =  async (req, res, next) => {
+  console.log(req.session);
   console.log("this is the userID", req.session.userId);
   if(!req.session.userId || req.session.userId == ""){
     console.log("true");

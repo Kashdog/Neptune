@@ -12,20 +12,22 @@ const express    = require('express'),
       var randomstring = require("randomstring");
       var _ = require('lodash');
       var crypto = require('crypto');
+      var cookieParser = require('cookie-parser');
 
       
 
 // App settings.
+app.use(cookieParser())
 app.use(session({
   path: "/",
-  secret: "feanarocurufinweartanaroereinioingilgalad",
+  secret: "feanarocurufinweartanaroereiniongilgalad",
   resave: false,
   saveUninitialized: false
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 
 // set view engine to ejs
@@ -50,7 +52,7 @@ app.get('/', (req, res, next) => {
 });
 
 // Database
-var driver = neo4j.driver('bolt://35.233.191.222:7687', neo4j.auth.basic("neo4j", 'bPCs40260$#'));
+var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
 var neo4jsession = driver.session();
 
 // ***** File Uploads *****
