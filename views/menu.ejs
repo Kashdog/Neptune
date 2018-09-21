@@ -2,10 +2,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Shuffle</title>
+  <title>Neptune</title>
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/hopscotch.css">
     <link rel="icon" href="../ruby.png" type="image/x-icon" />
       <style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
@@ -216,7 +217,7 @@ opacity: 0.8;
 <div class="over">
   <div class="dial">
     <div class="grad">
-      <a href="../profile/ruby.html">
+      <a href="/">
       <img style=""width="150px" height="150px" src="../ruby.png"></img>
       </a>  
     </div>
@@ -252,8 +253,68 @@ opacity: 0.8;
 
   
 
-    <script  src="js/menu.js"></script>
+    <script  src="../js/menu.js"></script>
+    <script src="../js/hopscotch.js"></script>
+    <script>
 
+        // Define the Tour
+          var tour = {
+               id: "menu",
+               steps: [
+                {
+                   title: "Edit your profile",
+                   content: "Click on this icon to edit your profile",
+                   target: "photo",
+                   placement: "bottom",
+                 },
+                 {
+                   title: "View or Share your Profile",
+                   content: "Click on this icon to view and share your card via screenshot",
+                   target: "cloud",
+                   placement: "bottom",
+                 },
+                 {
+                   title: "Network with others",
+                   content: "Click on this icon to network with others. Now lets see how contacts work",
+                   target: "portfolio",
+                   placement: "bottom",
+                   multipage: true,
+                   onNext: function() {
+                    window.location = "/contacts"
+                   }
+                 },
+                 {
+                    title: "My content",
+                    content: "Here is where I put my content.",
+                    target: "portfolio",
+                    multipage: true,
+                    placement: "bottom"
+                  }
+               ],
+                    onEnd: function() {
+                  setCookie("toured", "toured");
+                },
+                  onClose: function() {
+                  setCookie("toured", "toured");
+                }
+             };
+        
+            function setCookie(key, value) {
+              var expires = new Date();
+              expires.setTime(expires.getTime() + (100 * 365 * 24 * 60 * 60 * 1000));
+              document.cookie = key + '=' + value + ';path=/' + ';expires=' + expires.toUTCString();
+            };
+
+            function getCookie(key) {
+              var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+              return keyValue ? keyValue[2] : null;
+            };
+
+            // Initialize tour if it's the user's first time
+            if (!getCookie("toured")) {
+              hopscotch.startTour(tour);
+            }  
+           </script>
 
 
 

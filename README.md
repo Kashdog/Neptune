@@ -1,4 +1,4 @@
-# shuffle
+# Neptune
 
 To Set UP
 
@@ -10,7 +10,7 @@ Fill in the {username} and {password} with your neo4j and your password in your 
 
 make sure this is done in all the handlers where neo4j is used
 
-cd into shuffle
+cd into neptune
 npm install
 nodemon index.js
 

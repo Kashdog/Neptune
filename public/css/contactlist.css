@@ -148,9 +148,8 @@ Movies
 Detail
 --------------------*/
 .detail {
-  /* background: rgba(0, 0, 0, 0.5); */
   position: absolute;
-  background: rgba(28, 28, 28);
+  background: rgba(28, 28, 28, 1);
   top: 0;
   left: 0;
   width: 100%;
@@ -161,8 +160,7 @@ Detail
 }
 .detail::before {
   content: '';
-  /* background: #fff; */
-  /* background: rgba(0, 0, 0, 0.5); */
+  background: rgba(28, 28, 28);
   position: absolute;
   z-index: -1;
   top: 0;

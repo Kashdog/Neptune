@@ -93,6 +93,11 @@ body {
   -webkit-animation-delay: 1250ms;
           animation-delay: 1250ms;
 }
+
+.profile.on-enter li:nth-child(1) a.linkedinBtn {
+  -webkit-animation-delay: 1300ms;
+          animation-delay: 1300ms;
+}
 .profile.on-enter li:nth-child(1) a.link {
   -webkit-animation-delay: 1300ms;
           animation-delay: 1300ms;
@@ -105,6 +110,17 @@ body {
   -webkit-animation-delay: 1400ms;
           animation-delay: 1400ms;
 }
+
+.profile.on-enter li:nth-child(4) a.link {
+  -webkit-animation-delay: 1450ms;
+          animation-delay: 1450ms;
+}
+
+.profile.on-enter li:nth-child(5) a.link {
+  -webkit-animation-delay: 1500ms;
+          animation-delay: 1500ms;
+}
+
 
 .profile.on-enter img {
   -webkit-animation-delay: 1450ms;
@@ -318,7 +334,7 @@ a.link.resume:active {
     -webkit-animation-name: scaleXIn-small;
             animation-name: scaleXIn-small;
   }
-  .menuicon.on-enter, .profile.on-enter h1, .profile.on-enter h2, .profile.on-enter a.follow, .profile.on-enter a.link {
+  .menuicon.on-enter, .profile.on-enter h1, .profile.on-enter h2, .profile.on-enter a.follow, .profile.on-enter a.link, .profile.on-enter a.linkedinBtn {
     -webkit-animation-name: slideInLeft;
             animation-name: slideInLeft;
   }
@@ -978,4 +994,333 @@ a.link.resume:active {
   font-size: 21px;
   color: white;
   cursor: pointer;
+}
+
+.material-button {
+  width: 100%;
+}
+.material-button div {
+  width: 100%;
+}
+.material-button button, .material-button input[type="submit"] {
+  margin: 0;
+  border: 0;
+  border-radius: 2px;
+  padding: 6px 12px;
+  background: #ebebeb;
+  color: #3f4159;
+  font-size: 16px;
+  transition: all 150ms ease-out;
+}
+.material-button button:hover, .material-button button:focus, .material-button input[type="submit"]:hover, .material-button input[type="submit"]:focus {
+  background: #cd908b;
+  color: white;
+}
+.material-button button:active, .material-button input[type="submit"]:active {
+  transition: all 150ms ease-in;
+  background: #3f4159;
+}
+.material-button button.save, .material-button input[type="submit"].save {
+  width: 100%;
+  max-width: 256px;
+  padding: 12px 24px;
+  background: #05abe0;
+  color: white;
+  font-size: 18px;
+}
+.material-button button.save:hover, .material-button button.save:focus, .material-button input[type="submit"].save:hover, .material-button input[type="submit"].save:focus {
+  background: #05abe0;
+}
+.material-button button.save:active, .material-button input[type="submit"].save:active {
+  background: #3f4159;
+}
+@media only screen and (max-height: 444px) {
+  .material-button button.save, .material-button input[type="submit"].save {
+    display: none;
+  }
+}
+.material-button button.connect, .material-button input[type="submit"].connect {
+  display: block;
+  width: 100%;
+  border-radius: 1000px;
+  color: white;
+}
+.material-button button.gh, .material-button input[type="submit"].gh {
+  background: #4183c4;
+}
+.material-button button.gh:hover, .material-button button.gh:focus, .material-button input[type="submit"].gh:hover, .material-button input[type="submit"].gh:focus {
+  background: #7ba9d6;
+}
+.material-button button.gh.connected, .material-button input[type="submit"].gh.connected {
+  background: #ebebeb;
+  color: #343434;
+}
+.material-button button.gh.connected:hover, .material-button button.gh.connected:focus, .material-button input[type="submit"].gh.connected:hover, .material-button input[type="submit"].gh.connected:focus {
+  background: #4183c4;
+  color: white;
+}
+.material-button button.gh:active, .material-button input[type="submit"].gh:active {
+  background: #2c5d8d !important;
+}
+.material-button button.tw, .material-button input[type="submit"].tw {
+  background: #2daae1;
+}
+.material-button button.tw:hover, .material-button button.tw:focus, .material-button input[type="submit"].tw:hover, .material-button input[type="submit"].tw:focus {
+  background: #70c5eb;
+}
+.material-button button.tw.connected, .material-button input[type="submit"].tw.connected {
+  background: #ebebeb;
+  color: #343434;
+}
+.material-button button.tw.connected:hover, .material-button button.tw.connected:focus, .material-button input[type="submit"].tw.connected:hover, .material-button input[type="submit"].tw.connected:focus {
+  background: #2daae1;
+  color: white;
+}
+.material-button button.tw:active, .material-button input[type="submit"].tw:active {
+  background: #187da9 !important;
+}
+.material-button button.fb, .material-button input[type="submit"].fb {
+  background: #3b5997;
+}
+.material-button button.fb:hover, .material-button button.fb:focus, .material-button input[type="submit"].fb:hover, .material-button input[type="submit"].fb:focus {
+  background: #5e7ec0;
+}
+.material-button button.fb.connected, .material-button input[type="submit"].fb.connected {
+  background: #ebebeb;
+  color: #343434;
+}
+.material-button button.fb.connected:hover, .material-button button.fb.connected:focus, .material-button input[type="submit"].fb.connected:hover, .material-button input[type="submit"].fb.connected:focus {
+  background: #3b5997;
+  color: white;
+}
+.material-button button.fb:active, .material-button input[type="submit"].fb:active {
+  background: #263960 !important;
+}
+.material-button button.li, .material-button input[type="submit"].li {
+  background: #069;
+}
+.material-button button.li:hover, .material-button button.li:focus, .material-button input[type="submit"].li:hover, .material-button input[type="submit"].li:focus {
+  background: #0099e6;
+}
+.material-button button.li.connected, .material-button input[type="submit"].li.connected {
+  background: #ebebeb;
+  color: #343434;
+}
+.material-button button.li.connected:hover, .material-button button.li.connected:focus, .material-button input[type="submit"].li.connected:hover, .material-button input[type="submit"].li.connected:focus {
+  background: #069;
+  color: white;
+}
+.material-button button.li:active, .material-button input[type="submit"].li:active {
+  background: #00334d !important;
+}
+.material-button.center div {
+  display: flex;
+  justify-content: center;
+}
+
+@-webkit-keyframes rotateIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateX(30deg) rotateY(30deg) translateY(300px) translateZ(200px);
+            transform: rotateX(30deg) rotateY(30deg) translateY(300px) translateZ(200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateX(30deg) rotateY(30deg) translateY(300px) translateZ(200px);
+            transform: rotateX(30deg) rotateY(30deg) translateY(300px) translateZ(200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@-webkit-keyframes slideInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(100%) translateZ(0);
+            transform: translateY(100%) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(100%) translateZ(0);
+            transform: translateY(100%) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+#social {
+  margin: 20px 10px;
+  text-align: center;
+}
+
+.smGlobalBtn { /* global button class */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border:2px solid #ddd; /* add border to the buttons */
+    box-shadow: 0 3px 3px #999;
+    padding: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 2em;
+    border-radius: 27px;
+    -moz-border-radius:27px;
+    -webkit-border-radius:27px;
+}
+
+/* facebook button class*/
+.facebookBtn{
+    background: #4060A5;
+}
+
+.facebookBtn:before{ /* use :before to add the relevant icons */
+    font-family: "FontAwesome";
+    content: "\f09a"; /* add facebook icon */
+}
+
+.facebookBtn:hover{
+    color: #4060A5;
+    background: #fff;
+    border-color: #4060A5; /* change the border color on mouse hover */
+}
+
+/* github button class*/
+.githubBtn{
+  background: #000;
+}
+
+.githubBtn:before{
+    font-family: "FontAwesome";
+    content: "\f09b"; /* add github icon */
+    
+}
+
+.githubBtn:hover{
+    color: #000;
+    background: #fff;
+    border-color: #000;
+}
+
+/* twitter button class*/
+.twitterBtn{
+    background: #00ABE3;
+}
+
+.twitterBtn:before{
+      font-family: "FontAwesome";
+      content: "\f099"; /* add twitter icon */
+      
+}
+
+.twitterBtn:hover{
+      color: #00ABE3;
+      background: #fff;
+      border-color: #00ABE3;
+}
+
+/* google plus button class*/
+.googleplusBtn{
+    background: #e64522;
+}
+
+.googleplusBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0d5"; /* add googleplus icon */
+}
+
+.googleplusBtn:hover{
+      color: #e64522;
+      background: #fff;
+      border-color: #e64522;
+}
+
+/* linkedin button class*/
+.linkedinBtn{
+    background: #0094BC;
+}
+
+.linkedinBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0e1"; /* add linkedin icon */
+}
+
+.linkedinBtn:hover{
+      color: #0094BC;
+      background: #fff;
+      border-color: #0094BC;
+}
+
+/* pinterest button class*/
+.pinterestBtn{
+    background: #cb2027;
+}
+
+.pinterestBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0d2"; /* add pinterest icon */
+}
+
+.pinterestBtn:hover{
+      color: #cb2027;
+      background: #fff;
+      border-color: #cb2027;
+}
+
+/* tumblr button class*/
+.tumblrBtn{
+    background: #3a5876;
+}
+
+.tumblrBtn:before{
+      font-family: "FontAwesome";
+      content: "\f173"; /* add tumblr icon */
+}
+
+.tumblrBtn:hover{
+      color: #3a5876;
+      background: #fff;
+      border-color: #3a5876;
+}
+
+/* rss button class*/
+.rssBtn{
+    background: #e88845;
+}
+
+.rssBtn:before{
+      font-family: "FontAwesome";
+      content: "\f09e"; /* add rss icon */
+}
+
+.rssBtn:hover{
+      color: #e88845;
+      background: #fff;
+      border-color: #e88845;
 }

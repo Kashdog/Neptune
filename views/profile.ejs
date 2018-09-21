@@ -2,14 +2,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Shuffle</title>
+  <title>Neptune</title>
   <script src="https://use.typekit.net/lkh0ago.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel="icon" href="../ruby.png" type="image/x-icon" />
   <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="../css/all.css">
+  <link rel="stylesheet" href="../css/hopscotch.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     .menuicon{
       padding: 0px;
@@ -18,6 +20,25 @@
       left: 47.5%;
     }
   </style>
+  <% if (leftcolor && rightcolor) { %>
+  <style>
+    body {
+      --leftcolor: <%= leftcolor %>;
+      --rightcolor: <%= rightcolor %>;
+      background: linear-gradient(135deg, var(--leftcolor) 0%, var(--rightcolor) 100%);
+    }
+  </style>
+  <% } %>
+  <% if (cardcolor) { %>
+  <style>
+    
+    .profile {
+      
+      --cardcolor: <%= cardcolor  %>;
+      background: var(--cardcolor);
+    }
+  </style>
+  <% } %>
 
 </head>
 
@@ -27,7 +48,7 @@
       <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
     </div>
   </fieldset>
-  <a href="/menu"><img class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
+  <a href="/menu"><img id="menu" class="menuicon" height="100px" width="100px" src="../ruby.png" alt=""></a>
 
   <main class='profile' ontouchstart>
   <div class='background'></div>
@@ -57,6 +78,20 @@
           <div class="resume-icon"><i class="material-icons" style="color: white;">school</i></div>
         </a>
       </li>
+      <li>
+        <a class='link resume' href='https://<%= website %>' target='_blank'>
+          <div class="resume-icon"><i class="material-icons" style="color: white;">open_in_browser</i></div>
+        </a>
+      </li>
+    </ul>
+    <ul>
+      <li style="text-align: center;" class='padding'>
+        <fieldset class='material-button'>
+          <div>
+            <a class="linkedinBtn smGlobalBtn" href="<%= linkedin %>" ></a>
+          </div>
+        </fieldset>
+      </li>
     </ul>
     <div id="qrcode"></div>
   </section>
@@ -65,8 +100,9 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/master/qrcode.js"></script>
   <script  src="../js/index.js"></script>
+  <script src="../js/hopscotch.js"></script>
   <script>
-    var QRId = "https://feanaro-216004.appspot.com/qrconnect/<%= username %>"
+    var QRId = "http://ec2-54-183-229-52.us-west-1.compute.amazonaws.com:8081/qrconnect/<%= username %>"
     var qrcode = new QRCode("qrcode", {
         text: QRId,
         width: 150,
@@ -81,6 +117,65 @@
 
     var dataURL = canvas.toDataURL();
   </script>
+  <script>
+
+    // Define the Tour
+      var tour = {
+           id: "hello-hopscotch",
+           steps: [
+             {
+               title: "Start your Tour of Neptune",
+               content: "Click on this logo to see the Menu",
+               target: "menu",
+               placement: "bottom",
+               multipage: true,
+               onNext: function() {
+                 window.location = "/menu"
+               }
+             },
+             {
+               title: "My content",
+               content: "Here is where I put my content.",
+               target: document.querySelector("#portfolio"),
+               placement: "bottom"
+             }
+           ],
+              onEnd: function() {
+              setCookie("toured", "toured");
+            },
+              onClose: function() {
+              setCookie("toured", "toured");
+            }
+         };
+
+        function setCookie(key, value) {
+          var expires = new Date();
+          expires.setTime(expires.getTime() + (100 * 365 * 24 * 60 * 60 * 1000));
+          document.cookie = key + '=' + value + ';path=/' + ';expires=' + expires.toUTCString();
+        };
+
+        function getCookie(key) {
+          var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+          return keyValue ? keyValue[2] : null;
+        };
+        console.log(getCookie("toured"));
+        // Initialize tour if it's the user's first time
+        if (!getCookie("toured")) {
+          hopscotch.startTour(tour);
+        }    
+       </script>
+       <script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "Person",
+          "name" : "<%= name %>",
+          "url" : "http://ec2-54-183-229-52.us-west-1.compute.amazonaws.com:8081/viewprofile/<%= username %>",
+          "sameAs" : [
+            "http://<%= website %>",
+            "<%= linkedin %>"
+          ]
+        }
+        </script>
 
 
 

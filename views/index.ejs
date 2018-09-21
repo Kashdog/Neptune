@@ -1,60 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Shuffle</title>
-  <script src="https://use.typekit.net/lkh0ago.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="icon" href="../ruby.png" type="image/x-icon" />
-  <link rel="stylesheet" href="css/index.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        .avatar {
-            background: url("Alamut.jpg") no-repeat top center/cover;
-        }  
-    </style>  
-</head>
 
-<body>
+  <head>
 
-  <main class='profile' ontouchstart>
-  <div class='background'></div>
-  <aside class='avatar'></aside>
-  <section class='info'>
-    <h1>Shuffle</h1>
-    <h2 style="max-width: 80%">Shuffle is a Virtual Business Card <br> where you can connect to other people</h2>
-    <h2 onclick="location.href = '/auth/signup';">+ Sign Up</h2><a onclick="location.href = '/auth/login';" class='follow'>+ Log In</a>
-    <ul>
-      <li>
-        <a class='link portfolio' href='' target='_blank'>
-          <i class="material-icons" style="color: white;">cloud</i></div>
-        </a>
-      </li>
-      <li>
-        <a class='link codepen' href='h' target='_blank'>
-          <div class="chat-icon"><i class="material-icons" style="color: white;">search</i></div>
-        </a>
-      </li>
-      <li>
-        <a class='link github' href='' target='_blank'>
-          <div class="email-icon"><i class="material-icons" style="color: white;">account_circle</i></div>
-        </a>
-      </li>
-    </ul>
-    <img src="ruby.png" width="150px" height="150px">
-  </section>
-</main>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Virtual Business Cards">
+    <meta name="author" content="Aneesh Kashalikar">
+    <meta name="Keywords" content="Nodejs,graph,neo4j,networking,social media, businesscard, virtual businesscard, haystack, neptune, neptune cards">
+    <meta name="Description" content="Neptune aims to redefine how people connect and exchange contact information.">
 
+
+    <title>Neptune</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/new-age.min.css" rel="stylesheet">
+    <link href="css/landing.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">NEPTUNE</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/login">Sign In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/signup">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-7 my-auto">
+            <div class="header-content mx-auto">
+              <h1 class="mb-5">Neptune is a web app that allows you to network easily with professional and social contacts</h1>
+              <a href="/auth/signup" class="btn btn-outline btn-xl js-scroll-trigger btn-gradient">Get Started</a>
+            </div>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- insert divider -->
+
+<section id="intro">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h3>
+            What is Neptune? 
+          </h3>
+          <p>
+              Neptune aims to redefine how people connect and exchange contact information.
+          </p>
+          <p>
+              Inspired by the sentimental value traditional business cards gives people but improved with added integration from different platforms straight from your Neptune card
+          </p>
+        </div>
+      </div>
   
+      <div class="row my-5">
+        <div class="col-md-4">
+          <img class="img-fluid my-3" height="50px" width="50px" src="cardsmall.png">
+          <h5>
+            QR Code Scan
+          </h5>
+          <p>
+            Neptune lets you easily connect with everyone. users have the freedom to choose which contact method to put on their card that synchronizes easily with other users
+          </p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-fluid my-3" height="50px" width="50px" src="cardsmall.png">
+          <h5>
+            Customize your Cards
+          </h5>
+          <p>
+            We allow users to customize the way their virtual business card looks to express their inidivuality
+          </p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-fluid my-3" height="50px" width="50px" src="cardsmall.png"">
+          <h5>
+            Privacy
+          </h5>
+          <p>
+            We allow you to remain hidden so only a select few can contact you if you wish.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="features">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 col-lg-5">
+          <h6>
+            <span class="px-4 py-1 shine">Contact Information</span>
+          </h6>
+          <h2>
+            Share your Card
+          </h2>
+          <p>
+            We allow you to design a beautiful business card that is guaranteed to improve your networking success
+          </p>
+          <button onclick="window.location='/auth/signup';" type="button" class="btn btn-primary btn-sj">Learn More</button>
+        </div>
+        <div class="col-md-1 col-lg-3">
+        </div>
+        <div class="col-md-5 col-lg-4">
+          <img class="img-fluid" src="card_landing.png">
+        </div>
+      </div>
+  
+      <div class="row align-items-center">
+        <div class="col-md-5 col-lg-4">
+          <img class="img-fluid" src="contactlist.png">
+        </div>
+        <div class="col-md-1 col-lg-3">
+        </div>
+        <div class="col-md-6 col-lg-5">
+          <h6>
+            <span class="px-4 py-1 shine">Networking</span>
+          </h6>
+          <h2>
+            Connect with Anyone
+          </h2>
+          <p>
+            With our network your job of acquring contact information is made simpler than ever before
+          </p>
+          <button type="button" onclick="window.location='/auth/signup';" class="btn btn-primary btn-sj">Learn More</button>
+        </div>
+      </div>
+  
+  </section>
+  
+  <section id="cta">
+    <div class="container text-center text-light">
+      <div class=row">
+        <div class="col">
+          <h1 class="mb-3">
+            Start networking today
+          </h1>
+          <h5 class="mb-4">
+            Create your virtual professional card now and start networking.
+          </h5>
+          <button type="button" onclick="window.location='/auth/signup';" class="btn btn-primary btn-sj">Get Started</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+ <!---<section id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <h6>
+            Company
+          </h6>
+          <a href="#">About Us</a><br/>
+          <a href="#">Careers</a><br/>
+          <a href="#">Support</a>
+        </div>
+        <div class="col-md-2">
+          <h6>
+            Product
+          </h6>
+          <a href="#">Features</a><br/>
+          <a href="#">Pricing</a><br/>
+          <a href="#">Login</a>
+        </div>
+        <div class="col-md-2">
+          <h6>
+            Resources
+          </h6>
+          <a href="#">Help</a><br/>
+          <a href="#">Blog</a><br/>
+          <a href="#">Status</a>
+        </div>
+        <div class="col-md-2">
+          <h6>
+            Performance
+          </h6>
+          <a href="#">Media</a><br/>
+          <a href="#">Reach</a><br/>
+          <a href="#">Creative</a>
+        </div>
+        <div class="col-md-3 offset-md-1">
+          <h6>
+            Contact
+          </h6>
+          <a href="#">212.555.0102</a><br/>
+          <em><a href="#">aneesh@neptune.ai</a></em><br/>
+          <a href="#"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-facebook-f"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-youtube"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-old-republic"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script  src="js/index.js"></script>
+    <footer>
+      <div class="container">
+        <p>&copy; Neptune AI 2018. All Rights Reserved.</p>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#">Privacy</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Terms</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">FAQ</a>
+          </li>
+        </ul>
+      </div>
+    </footer>-->
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-
-</body>
+    <!-- Custom scripts for this template -->
+    <script src="js/new-age.min.js"></script>
+      <script type="application/ld+json">
+        { "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "Neptune Cards",
+        "legalName" : "Elite Strategies Llc",
+        "url": "http://ec2-54-183-229-52.us-west-1.compute.amazonaws.com:8081/",
+        "foundingDate": "2018",
+        "founders": [
+        {
+        "@type": "Person",
+        "name": "Aneesh Kashalikar"
+        },
+        {
+        "@type": "Person",
+        "name": "Russel Dulay"
+        } ],
+        "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "telephone": "[+1978-333-3072]",
+        "email": "aneeshkashalikar@gmail.com"
+        },
+        "sameAs": [ 
+        "https://www.linkedin.com/in/russel-dulay-70a58a6a/",
+        "https://www.linkedin.com/in/aneeshkashalikar/"
+        ]}
+       </script>
+  </body>
 
 </html>

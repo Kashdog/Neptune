@@ -1,4 +1,4 @@
-const PORT       = process.env.PORT || 8081;
+const PORT       = 8081;
 const express    = require('express'),
       app        = express(),
       bodyParser = require('body-parser'),
@@ -43,6 +43,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/contacts', require('./routes/contacts'))
 app.use('/viewprofile', require('./routes/viewprofile'));
 app.use('/viewuniversity', require('./routes/viewuniversity'));
+app.use('/vieworganization', require('./routes/vieworganization'));
 app.use('/qrconnect', require('./routes/qrconnect'))
 app.use('/viz', require('./routes/viz'));
 
@@ -52,7 +53,7 @@ app.get('/', (req, res, next) => {
 });
 
 // Database
-var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
+var driver = neo4j.driver('bolt://35.236.93.234:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
 var neo4jsession = driver.session();
 
 // ***** File Uploads *****

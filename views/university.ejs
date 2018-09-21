@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Shuffle</title>
+  <title>Neptune</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -65,7 +65,7 @@
 </fieldset>
 
 <div class="app">
-    <a href="/menu"><img onclick="location.href = '../menu/index.html';" class="menuicon" height="80px" width="80px" src="../../ruby.png" alt=""></a> 
+    <a href="/menu"><img onclick="location.href = '/menu/';" class="menuicon" height="80px" width="80px" src="../../ruby.png" alt=""></a> 
   <header>
     <a href="/contacts/groups/universities/edit"><h1><strong>Create</strong></h1></a>
     <nav></nav>
@@ -107,6 +107,9 @@
     <div id="connect" class="movie">
       <button onclick="window.location = '/viewuniversity/profile/' + $('#connect').children('input').val()" class="play">View Profile</button>
       <button onclick="window.location = '/viewuniversity/members/' + $('#connect').children('input').val()" class="play">View Members</button>
+      <button onclick="window.location = '/contacts/groups/universities/' +  + $('#connect').children('input').val() + '/join'" class="play">
+        Join
+    </button>
     </form>
   </div>
 </div>

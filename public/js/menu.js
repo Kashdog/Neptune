@@ -66,19 +66,19 @@ function swap(o) {
   console.log($(cimg).attr("src"));
   
   if (id == "#email") {
-    var nimg = "settingsh.png";;
+    var nimg = "../settingsh.png";;
     $(cimg).attr("src",nimg);
   }
   if (id == "#photo") {
-    var nimg = "cardh.png";
+    var nimg = "../cardh.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#cloud") {
-    var nimg = "cloudh.png";
+    var nimg = "../cloudh.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#portfolio") {
-    var nimg = "searchh.png";
+    var nimg = "../searchh.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#settings") {
@@ -97,23 +97,23 @@ function swapBack(o) {
   console.log($(cimg).attr("src"));
   
   if (id == "#email") {
-    var nimg = "settings.png";
+    var nimg = "../settings.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#photo") {
-    var nimg = "card.png";
+    var nimg = "../card.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#cloud") {
-    var nimg = "cloud.png";
+    var nimg = "../cloud.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#portfolio") {
-    var nimg = "search.png";
+    var nimg = "../search.png";
     $(cimg).attr("src",nimg);
   }
   if (id == "#settings") {
-    var nimg = "rubyicon.png";
+    var nimg = "../rubyicon.png";
     $(cimg).attr("src",nimg);
   }
   
@@ -127,7 +127,7 @@ function redirect(o) {
   console.log($(cimg).attr("src"));
   
   if (id == "#email") {
-    window.location.href = "../settings/index.html";
+    window.location.href = "/";
   }
   if (id == "#photo") {
     window.location.href = "../user/edit";

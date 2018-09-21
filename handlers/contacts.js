@@ -5,8 +5,8 @@ const neo4j = require('neo4j-driver').v1;
       var User = require('../models/neo4j/user');
       var _ = require('lodash');
       var crypto = require('crypto');
-
-      var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
+      var nodemailer = require('nodemailer');
+      var driver = neo4j.driver('bolt://35.236.93.234:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
       var session = driver.session();
 
 exports.index = async (req, res, next) => {
@@ -16,7 +16,7 @@ exports.index = async (req, res, next) => {
             res.redirect("/auth/login");
         } else{
             var getOtherUsers = function (session) {
-                return session.run("MATCH (a:User), (b:User {id: {userId}}) WHERE NOT (a)-[:connectedTo]->(b:User {id: {userId}}) AND a.id  <> {userId} AND NOT (b)-[:invites]->(a) RETURN a",
+                return session.run("MATCH (a:User), (b:User {id: {userId}}) WHERE NOT (a)-[:connectedTo]->(b:User {id: {userId}}) AND a.id  <> {userId} AND NOT (b)-[:invites]->(a)  AND NOT (a)-[:invites]->(b) RETURN a",
                 {
                   userId: req.session.userId,
                 })
@@ -252,7 +252,7 @@ exports.editUniversity =  async (req, res, next) => {
         var currentUser = getCurrentUser(session);
         await currentUser.then(function(result) {
             console.log(result.properties.username);
-            res.render("createUniversity", {username: result.properties.username});
+            res.render("createUniversity", {username: result.properties.username, message: ""});
         })
     }
   }
@@ -336,6 +336,138 @@ exports.editUniversity =  async (req, res, next) => {
       }  
   }
 
+  exports.organizations = async (req, res, next) => {
+    try {
+        if(!req.session.userId || req.session.userId == ""){
+            console.log("true");
+            res.redirect("/auth/login");
+        } else{
+            console.log("this is the organizations page");
+            var getOrganizations = function (session) {
+                return session.run("MATCH (u:Group {type: 'organization'})return u")
+                .then(results => {
+                    return results.records;
+                })
+            };
+            var allOrganizations = [];
+            var organizations = getOrganizations(session);
+            organizations.then(function(result) {
+                console.log("Organizations Result", result)
+                for(var i = 0; i < result.length; i++){
+                    allOrganizations.push(result[i].get(0).properties);
+                }
+                console.log("These are the organizations", allOrganizations);
+                console.log("number of organizations", allOrganizations.length);
+                res.render('organization.ejs', { "users": allOrganizations });
+            }); 
+        }
+    } catch(err) {
+      return next(err);
+    }
+    
+}
+
+  
+  exports.editOrganization =  async (req, res, next) => {
+    if(!req.session.userId || req.session.userId == ""){
+        console.log("true");
+        res.redirect("/auth/login");
+    } else{
+        var getCurrentUser = function (session) {
+        return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+        {
+            userId: req.session.userId,
+        })
+            .then(results => {
+            return results.records[0].get(0);
+            })
+        };
+        var currentUser = getCurrentUser(session);
+        await currentUser.then(function(result) {
+            console.log(result.properties.username);
+            res.render("createOrganization", {username: result.properties.username, message: ""});
+        })
+    }
+  }
+
+  exports.updateOrganization = async (req, res, next) => {
+    try {
+      let register = function (session, username, password, phone, email) {
+        return session.run("MATCH (u:Group {type: 'organization', name: {name} }) RETURN u", {name: req.body.name})
+          .then(results => {
+            if (!_.isEmpty(results.records)) {
+              res.render('createOrganization', {
+                message: 'Group already exists',
+                email,
+                username,
+                linkedIn: "",
+                phone         
+              })
+            }
+            else {
+              return session.run("CREATE (u:Group {type: 'organization', moderatorid: {id}, name: {name}, logo: {logo}, location: {location}, moderatorusername: {username}, website: {website}}) RETURN u",
+                {
+                    id: req.session.userId,
+                    name: req.body.name,
+                    logo: req.body.logo,
+                    location: req.body.location,
+                    username : req.body.username,
+                    website: req.body.website
+                }
+              ).then(results => {
+                  
+                  return results.records[0].get(0);
+                }
+              )
+            }
+          })
+      };
+      let createOrganization = register(session);
+      await createOrganization.then(function(result) {
+        console.log("hallaflnsaj", result);
+        res.redirect('/contacts/groups/organizations')
+     })
+    } catch(err) {
+      return next(err);
+    }
+  }
+
+  exports.joinOrganization = async(req, res, next) => {
+    try {
+        var getCurrentUser = function (session) {
+            return session.run("MATCH (n:User{id: {userId}}) RETURN n",
+            {
+                userId: req.session.userId,
+            })
+                .then(results => {
+                return results.records[0].get(0);
+                })
+            };
+        var joinOrganization = function (session, sender, organization) {
+            return session.run("MATCH (a:User{username: {senderUserName}}),(b:Group{type: 'organization', name: {organization}}) WHERE NOT ((a)-[:memberOf]->(b)) CREATE (a)-[r:memberOf]->(b) RETURN type(r)",
+            {
+            senderUserName: sender,
+            organization: organization
+            })
+            .then(results => {
+                return results;
+            })
+        };
+          var currentUser = getCurrentUser(session);
+          currentUser.then(function(result) {
+            console.log("join an orgnanization");
+            console.log(result.properties.username);
+            console.log(result.properties.username, req.params.name);
+            var join = joinOrganization(session, result.properties.username, req.params.name);
+            join.then(function(result) {
+                console.log(result);
+                res.redirect("/contacts/groups/organizations")
+            });
+         });
+      } catch(err) {
+        return next(err);
+      }  
+  }
 
 
 exports.changeGroup = async (req, res, next) => {
@@ -344,6 +476,9 @@ exports.changeGroup = async (req, res, next) => {
         if(req.body.group == "university"){
             res.redirect("/contacts/groups/universities")
         } 
+        else if(req.body.group == "organization"){
+            res.redirect("/contacts/groups/organizations")
+        }
         else{
             res.redirect("/contacts");
         }
@@ -364,13 +499,13 @@ exports.connect = async (req, res, next) => {
                 })
             };
         var createConnection = function (session, sender, receiver) {
-            return session.run("MATCH (a:User{username: {senderUserName}}),(b:User{username: {receiverUserName}}) CREATE (a)-[r:invites]->(b) RETURN type(r)",
+            return session.run("MATCH (a:User{username: {senderUserName}}),(b:User{username: {receiverUserName}}) CREATE (a)-[r:invites]->(b) RETURN a, b",
             {
             senderUserName: sender,
             receiverUserName: receiver
             })
             .then(results => {
-                return results.records[0].get(0);
+                return results.records;
             })
         };
           var currentUser = getCurrentUser(session);
@@ -379,7 +514,28 @@ exports.connect = async (req, res, next) => {
             console.log(req.body.username);
             var connection = createConnection(session, result.properties.username, req.body.username);
             connection.then(function(result) {
-                console.log(result);
+                console.log("this is the invite result 1", result[0].get(0));
+                console.log("this is the invite result 2", result[0].get(1));
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'aneeshkashalikar@gmail.com',
+                      pass: 'feanarocurufinwe123$#'
+                    }
+                });
+                var mailOptions = {
+                    from: 'aneeshkashalikar@gmail.com',
+                    to: String(result[0].get(1).properties.email),
+                    subject: 'You have a new invite on Neptune',
+                    text: String(result[0].get(0).properties.name) + ' invited you on Neptune'
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                });
                 res.redirect("/contacts")
             });
          });

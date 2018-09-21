@@ -8,7 +8,7 @@ const neo4j = require('neo4j-driver').v1
       var Facebook = require('facebook-node-sdk');
 
 
-      var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
+      var driver = neo4j.driver('bolt://35.236.93.234:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
       var session = driver.session();
 
 exports.signup = async (req, res, next) => {
@@ -91,9 +91,10 @@ exports.login = async (req, res, next) => {
 exports.authenticate = async (req, res, next) => {
   try{
     var getCurrentUser = function (session) {
-      return session.run("MATCH (n:User{username: {userName}}) RETURN n",
+      return session.run("MATCH (n:User{username: {userName}, password: {password} }) RETURN n",
       {
         userName: req.body.username,
+        password: hashPassword(req.body.username, req.body.password)
       })
         .then(results => {
           return results.records;
@@ -112,6 +113,7 @@ exports.authenticate = async (req, res, next) => {
         });
       }
       console.log("Chewbacca");
+      console.log("this is the hashed ", hashPassword(req.body.username, req.body.password))
       console.log(result[0].get(0).properties.username);
       req.session.userId = result[0].get(0).properties.id
       res.redirect("/user");

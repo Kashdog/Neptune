@@ -3,13 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Shuffle</title>
+  <title>Neptune</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400'>
   <link rel="stylesheet" href="css/all.css">
   <link rel="stylesheet" href="css/contactlist.css">
+  <link rel="stylesheet" href="css/hopscotch.css">
   <link rel="icon" href="../ruby.png" type="image/x-icon">
   <style>
 
@@ -67,22 +68,23 @@
 <div class="app">
     <a href="../sweet-circle-menu/index.html"><img onclick="location.href = '../menu';" class="menuicon" height="80px" width="80px" src="../ruby.png" alt=""></a> 
   <header>
-    <h1><strong>Shuffle</strong></h1>
+    <h1><strong>Neptune</strong></h1>
     <nav></nav>
     <div class="search"><input class="searchinput" type="text" required="required"/><svg><use xlink:href="#ico-search"></use></svg></div>
   </header>
   <h2>Connect With</h2>
   <form style="display: inline;" action="/contacts/changeview" method="POST" class="radio">
-    <input class="radio" type="radio" name="all" value="all" checked> All 
-    <input class="radio" type="radio" name="all" value="incontacts"> In Contacts
-    <input class="radio" type="radio" name="all" value="invites"> Invites
-    <input class="radio" type="radio" name="all" value="recommendedfriends"> Recommendations
+    <input class="radio" type="radio" name="all" value="all" id="all" checked> All 
+    <input class="radio" type="radio" name="all" value="incontacts" id="incontacts"> In Contacts
+    <input class="radio" type="radio" name="all" value="invites" id="invites"> Invites
+    <input class="radio" type="radio" name="all" value="recommendedfriends" id="recommendedfriends"> Recommendations
   </form>
   <form style="display: inline;" action="/contacts/changegroup/" method="POST">
     <select name="group">
       <option value="individual">Individuals</option>
       <option value="university">University</option>
       <option value="company">Company</option>
+      <option value="organization">Organization</option>
     </select>
   </form>
   <section class="movies">
@@ -134,6 +136,62 @@
   
 
     <script  src="js/contactlist.js"></script>
+    <script src="js/hopscotch.js"></script>
+    <script>
+
+        // Define the Tour
+          var tour = {
+               id: "network",
+               steps: [
+                {
+                   title: "View All of Everyone on Neptune",
+                   content: "Click on this button to view everyone on Neptune. Click on the profiles to add people.",
+                   target: "all",
+                   placement: "bottom",
+                 },
+                 {
+                   title: "View People in your Contacts",
+                   content: "Click on this button to view people in your contacts. Click on the profiles to view the contact cards ",
+                   target: "incontacts",
+                   placement: "bottom",
+                 },
+                 {
+                   title: "View your Invites",
+                   content: "Click on this button to view people who have invited you",
+                   target: "invites",
+                   placement: "bottom"
+                 },
+                 {
+                    title: "View your Recommendations",
+                    content: "Here are your recommendations to connect with based on people you know",
+                    target: "recommendedfriends",
+                    placement: "bottom"
+                  }
+               ],
+                    onEnd: function() {
+                  setCookie("toured", "toured");
+                },
+                  onClose: function() {
+                  setCookie("toured", "toured");
+                }
+             };
+    
+            function setCookie(key, value) {
+              var expires = new Date();
+              expires.setTime(expires.getTime() + (100 * 365 * 24 * 60 * 60 * 1000));
+              document.cookie = key + '=' + value + ';path=/' + ';expires=' + expires.toUTCString();
+            };
+
+            function getCookie(key) {
+              var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+              return keyValue ? keyValue[2] : null;
+            };
+            
+            // Initialize tour if it's the user's first time
+            if (!getCookie("toured")) {
+              hopscotch.startTour(tour);
+            }      
+           </script>
   <script>
     $('input[type=radio]').on('change', function() {
         $(this).closest("form").submit();

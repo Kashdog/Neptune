@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Shuffle</title>
+  <title>Neptune</title>
   <script src="https://use.typekit.net/lkh0ago.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -38,6 +38,7 @@
               display: block;
               top: 0%;
             }
+
           </style>
   
 </head>
@@ -48,7 +49,7 @@
       <input class='save' onclick="location.href = '/auth/logout/';" style="background-color: #f5515f;" type='submit' value='log out'>
     </div>
   </fieldset>
-  <img onclick="location.href = '../menu/index.html';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt="">
+  <img onclick="location.href = '../../menu/';" class="menuicon" height="100px" width="100px" src="../ruby.png" alt="">
   <div id='settings' ontouchstart>
   <input checked class='nav' name='nav' type='radio'>
   <span class='nav'>Create a Card</span>
@@ -112,8 +113,8 @@
           <li>
             <fieldset class='material'>
               <div>
-                <input required type='text' name="github">
-                <label>Github</label>
+                <input type='text' name="website">
+                <label>Website</label>
                 <hr>
               </div>
             </fieldset>
@@ -125,6 +126,33 @@
                 <label>Linkedin</label>
                 <hr>
               </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class="material">
+              <div>
+                  <input type="color" name="leftcolor" value="#f5515f" />
+                  <label>Pick Left Gradient Color</label>
+                  <hr>
+                  </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class="material">
+              <div>
+                  <input type="color" name="rightcolor" value="#05abe0" />
+                  <label>Pick Right Gradient Color</label>
+                  <hr>
+                  </div>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset class="material">
+              <div>
+                  <input type="color" name="cardcolor" value="" />
+                  <label>Pick Card Color</label>
+                  <hr>
+                  </div>
             </fieldset>
           </li>
           <li>

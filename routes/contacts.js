@@ -43,6 +43,21 @@ router.route("/groups/universities/edit")
 router.route("/groups/universities/:name/join")
   .get(handler.joinUniversity)
 
+// Route to see Organization Groups
+
+router.route("/groups/organizations")
+  .get(handler.organizations)
+
+// Route to edit or create Organization Groups
+router.route("/groups/organizations/edit")
+  .get(handler.editOrganization)
+  .post(handler.updateOrganization)
+
+// Route to join an Organization Group
+
+router.route("/groups/organizations/:name/join")
+  .get(handler.joinOrganization)
+
 // Route to Connect with others
 
 router.route("/connect/")

@@ -6,7 +6,7 @@ const neo4j = require('neo4j-driver').v1;
       var _ = require('lodash');
       var crypto = require('crypto');
 
-      var driver = neo4j.driver('bolt://35.236.104.204:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
+      var driver = neo4j.driver('bolt://35.236.93.234:7687', neo4j.auth.basic("neo4j", 'feanarocurufinwe123$#'));
       var session = driver.session();
 
       exports.index = (req, res, next) => {
@@ -44,7 +44,7 @@ const neo4j = require('neo4j-driver').v1;
               res.render("/contacts/")
             } else{
               user = result[0].get(0);
-              res.render("profile", {name: user.properties.name, title: user.properties.title, phonenumber: user.properties.phonenumber, email: user.properties.email, location: user.properties.location, username: user.properties.username, bio: user.properties.bio, profilepic: user.properties.profilepic, resume: user.properties.resume});
+              res.render("profile", {name: user.properties.name, title: user.properties.title, phonenumber: user.properties.phonenumber, email: user.properties.email, location: user.properties.location, username: user.properties.username, bio: user.properties.bio, profilepic: user.properties.profilepic, resume: user.properties.resume, linkedin: user.properties.linkedin, website: user.properties.website, leftcolor: user.properties.leftcolor, rightcolor: user.properties.rightcolor, cardcolor: user.properties.cardcolor});
             }
          });
         } catch(err) {
